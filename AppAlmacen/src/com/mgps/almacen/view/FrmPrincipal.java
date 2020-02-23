@@ -10,6 +10,11 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import java.awt.Color;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmPrincipal extends JFrame {
 
@@ -36,15 +41,25 @@ public class FrmPrincipal extends JFrame {
 	 */
 	public FrmPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 732, 385);
+		setBounds(100, 100, 786, 427);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnEntrada = new JButton("");
+		btnEntrada.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				FormNewEntrada  NewEntrada = new FormNewEntrada();
+				NewEntrada.setVisible(true);
+		
+			}
+		});
+		btnEntrada.setBackground(UIManager.getColor("Button.background"));
+		btnEntrada.setForeground(Color.LIGHT_GRAY);
 		btnEntrada.setIcon(new ImageIcon("C:\\Users\\MG_KEVIN\\git\\warehouse-mgs\\AppAlmacen\\src\\cjava\\imagenes\\+entrada.png"));
-		btnEntrada.setBounds(10, 153, 144, 153);
+		btnEntrada.setBounds(10, 224, 138, 153);
 		contentPane.add(btnEntrada);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -66,8 +81,20 @@ public class FrmPrincipal extends JFrame {
 		JMenu mnNewMenu_4 = new JMenu("Acerca de");
 		menuBar.add(mnNewMenu_4);
 		
-		JButton btnNewButton_3_1 = new JButton("");
-		btnNewButton_3_1.setBounds(310, 153, 144, 166);
+		JButton btnNewButton_3_1 = new JButton("REPORTE ENTRADA");
+		btnNewButton_3_1.setBounds(158, 224, 144, 153);
 		contentPane.add(btnNewButton_3_1);
+		
+		JButton btnNewButton_3_1_1 = new JButton("SALIDA ENTRADA");
+		btnNewButton_3_1_1.setBounds(312, 224, 144, 153);
+		contentPane.add(btnNewButton_3_1_1);
+		
+		JButton btnNewButton_3_1_2 = new JButton("NUEVA SALIDA");
+		btnNewButton_3_1_2.setBounds(466, 224, 144, 153);
+		contentPane.add(btnNewButton_3_1_2);
+		
+		JButton btnNewButton_3_1_3 = new JButton("INVENTARIO");
+		btnNewButton_3_1_3.setBounds(620, 224, 144, 153);
+		contentPane.add(btnNewButton_3_1_3);
 	}
 }
