@@ -11,36 +11,57 @@ public class ConexionDB {
 	static String driver;
 	static String user;
 	static String clave;
-	static Connection conn;
+	static Connection cone;
 	
 
-    private ConexionDB() throws SQLException, ClassNotFoundException{
-    	if (conn == null) {
-    		conn = getConnection();
-    	}
-    }
+		
+   // private ConexionDB() throws SQLException, ClassNotFoundException{
+   // 	if (conn == null) {
+    //		conn = getConnection();
+    ///	}
+   // }
 	
-    public static Connection getConnection() 
-            throws SQLException, ClassNotFoundException{
-        if (conn == null || conn.isClosed()){
+    public static Connection getConnection()  throws SQLException, ClassNotFoundException{
+        if (cone == null || cone.isClosed()){
             // Leyendo del archivo .properties
             leerPropiedades("conn");
             // Registro del Driver
             Class.forName(driver);
             // Realizo la conexiÃ³n
-            conn = DriverManager.
-                    getConnection(url, user, clave);
+            
+            cone = DriverManager.getConnection(url, user, clave);
+            
+                       
+                        
         }
-        return conn;
+        return cone;
     }
     
     // Metodo para leer el archivo de propiedades
     private static void leerPropiedades(String archivo){
-        ResourceBundle recurso = 
-                ResourceBundle.getBundle(archivo);
+        ResourceBundle recurso =   ResourceBundle.getBundle(archivo);
         url = recurso.getString("url");
         driver = recurso.getString("driver");
         user = recurso.getString("user");
         clave = recurso.getString("clave");
     }
+    
+    
+    public static Connection getConexion2020() {
+		Connection con = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://db4free.net:3306/bdmgsalmacen";
+			String usr = "usermgsolutions";
+			String psw = "Rampwd@123";
+			
+			con = DriverManager.getConnection(url, usr, psw);
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("Error >> Driver no Instalado!!");
+		} catch (SQLException e) {
+			System.out.println("Error >> de conexión con la BD");
+		}
+		return con;
+	}
 }

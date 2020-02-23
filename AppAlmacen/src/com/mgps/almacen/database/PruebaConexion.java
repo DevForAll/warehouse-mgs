@@ -10,7 +10,7 @@ public class PruebaConexion {
 		// prueba de coexion a la base de datos
 		 Connection cn;
 	        try {
-	            cn= ConexionDB.getConnection();
+	            cn= ConexionDB.getConexion2020();
 	            System.out.println("Conexion exitosa...");
 	        } catch (Exception e) {
 	            System.out.println("Error :" + e.getMessage());
