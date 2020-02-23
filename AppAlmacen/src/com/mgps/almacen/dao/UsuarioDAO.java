@@ -1,5 +1,5 @@
 package com.mgps.almacen.dao;
 
-public class ClienteDAO {
+public class UsuarioDAO {
 
 }

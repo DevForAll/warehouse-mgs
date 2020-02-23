@@ -1,5 +1,5 @@
 package com.mgps.almacen.controller;
 
-public class ClienteBLL {
+public class UsuarioBLL {
 
 }

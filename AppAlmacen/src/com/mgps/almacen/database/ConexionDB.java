@@ -13,32 +13,34 @@ public class ConexionDB {
 	static String clave;
 	static Connection conn;
 	
-    // Metodo para leer el archivo de propiedades
-    private static void leerPropiedades(String archivo){
-//    	LEER ARCHIVO CONFIG
-    	ResourceBundle config = ResourceBundle.getBundle(archivo);
-//		Obtiene los datos del archivo    	
-        url = config.getString("url");
-        driver = config.getString("driver");
-        user = config.getString("user");
-        clave = config.getString("clave");
-    }
 
-    public static Connection getConnection() throws SQLException, ClassNotFoundException{
-    	if (conn == null || conn.isClosed()) {
-//		Leyendo archivo config
-    		leerPropiedades("conn");
-//		Registro del drivar (jar)
-    		Class.forName(driver);
-//		Realizando conexion
-    		conn = DriverManager.getConnection(url, user, clave);
+    private ConexionDB() throws SQLException, ClassNotFoundException{
+    	if (conn == null) {
+    		conn = getConnection();
     	}
-    	return conn;
     }
 	
-	private ConexionDB() throws SQLException, ClassNotFoundException{
-		if (conn == null) {
-			conn = getConnection();
-		}
-	}
+    public static Connection getConnection() 
+            throws SQLException, ClassNotFoundException{
+        if (conn == null || conn.isClosed()){
+            // Leyendo del archivo .properties
+            leerPropiedades("conn");
+            // Registro del Driver
+            Class.forName(driver);
+            // Realizo la conexión
+            conn = DriverManager.
+                    getConnection(url, user, clave);
+        }
+        return conn;
+    }
+    
+    // Metodo para leer el archivo de propiedades
+    private static void leerPropiedades(String archivo){
+        ResourceBundle recurso = 
+                ResourceBundle.getBundle(archivo);
+        url = recurso.getString("url");
+        driver = recurso.getString("driver");
+        user = recurso.getString("user");
+        clave = recurso.getString("clave");
+    }
 }
