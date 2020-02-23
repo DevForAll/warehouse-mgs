@@ -42,18 +42,10 @@ public class FrmPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/1354826121_preferences-desktop-user-password.png")));
-		btnNewButton.setBounds(164, 169, 107, 104);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_3 = new JButton("");
-		btnNewButton_3.setBounds(379, 169, 107, 104);
-		contentPane.add(btnNewButton_3);
-		
-		JButton btnNewButton_3_1 = new JButton("");
-		btnNewButton_3_1.setBounds(496, 169, 107, 104);
-		contentPane.add(btnNewButton_3_1);
+		JButton btnEntrada = new JButton("");
+		btnEntrada.setIcon(new ImageIcon("C:\\Users\\MG_KEVIN\\git\\warehouse-mgs\\AppAlmacen\\src\\cjava\\imagenes\\+entrada.png"));
+		btnEntrada.setBounds(10, 153, 144, 153);
+		contentPane.add(btnEntrada);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 706, 28);
@@ -73,5 +65,9 @@ public class FrmPrincipal extends JFrame {
 		
 		JMenu mnNewMenu_4 = new JMenu("Acerca de");
 		menuBar.add(mnNewMenu_4);
+		
+		JButton btnNewButton_3_1 = new JButton("");
+		btnNewButton_3_1.setBounds(310, 153, 144, 166);
+		contentPane.add(btnNewButton_3_1);
 	}
 }
