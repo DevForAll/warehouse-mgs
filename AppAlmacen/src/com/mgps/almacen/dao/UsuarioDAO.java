@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
-import com.mgps.almacen.entity.UsuarioIO;
+import com.mgps.almacen.entity.UsuarioTO;
 import com.mgps.almacen.database.ConexionDB;
 
 
@@ -14,9 +14,9 @@ public class UsuarioDAO {
 	
 	
 
-public UsuarioIO obtenerUsuario(UsuarioIO usu){
+public UsuarioTO obtenerUsuario(UsuarioTO usu){
 	
-	UsuarioIO usuario = null;
+	UsuarioTO usuario = null;
 	
 	Connection con = null;
 	PreparedStatement pst = null;
@@ -38,7 +38,7 @@ public UsuarioIO obtenerUsuario(UsuarioIO usu){
 			rs = pst.executeQuery();
 			
 			while (rs.next()) {
-				usuario = new UsuarioIO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				usuario = new UsuarioTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
 				
 			}
 			
