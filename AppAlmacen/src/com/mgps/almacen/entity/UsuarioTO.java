@@ -1,68 +1,103 @@
 package com.mgps.almacen.entity;
 
-public class UsuarioIO {
+public class UsuarioTO {
 	
-	private String usuario;
-	private String clave;
-	private String nombre;
-	private String apellidos;
-	private String ciudad;
+	private int idUsuario;
+	private String nombreApellidos;
+	private String login;
+	private String password;
+	private String icono;
+	private String nombreIcono;
+	private String correo;
+	private String rol;
+	private String estado;
 
+	public   UsuarioTO() {	
+	}
 	
-	public   UsuarioIO(String usuario, String clave, String nombre, String apellidos, String ciudad) {
-
-		this.usuario = usuario;
-		this.clave = clave;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.ciudad = ciudad;
+	public UsuarioTO(Integer idUsuario, String nombreApellidos, String login, String password, String icono,
+			String nombreIcono, String correo, String rol, String estado) {
+//		super();
+		this.idUsuario = idUsuario;
+		this.nombreApellidos = nombreApellidos;
+		this.login = login;
+		this.password = password;
+		this.icono = icono;
+		this.nombreIcono = nombreIcono;
+		this.correo = correo;
+		this.rol = rol;
+		this.estado = estado;
 	}
 
-	public   UsuarioIO() {
-
+	public Integer getIdUsuario() {
+		return idUsuario;
 	}
 
-
-	public String getUsuario() {
-		return usuario;
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public String getNombreApellidos() {
+		return nombreApellidos;
 	}
 
-	public String getClave() {
-		return clave;
+	public void setNombreApellidos(String nombreApellidos) {
+		this.nombreApellidos = nombreApellidos;
 	}
 
-	public void setClave(String clave) {
-		this.clave = clave;
+	public String getLogin() {
+		return login;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public String getPassword() {
+		return password;
 	}
 
-	public String getApellidos() {
-		return apellidos;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+	public String getIcono() {
+		return icono;
 	}
 
-	public String getCiudad() {
-		return ciudad;
+	public void setIcono(String icono) {
+		this.icono = icono;
 	}
 
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
+	public String getNombreIcono() {
+		return nombreIcono;
 	}
 
-	
+	public void setNombreIcono(String nombreIcono) {
+		this.nombreIcono = nombreIcono;
+	}
 
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 }
