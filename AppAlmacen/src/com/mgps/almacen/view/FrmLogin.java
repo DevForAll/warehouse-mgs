@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.mgps.almacen.dao.UsuarioDAO;
-import com.mgps.almacen.entity.UsuarioIO;
+import com.mgps.almacen.entity.UsuarioTO;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -81,14 +81,14 @@ public class FrmLogin extends JFrame {
 				UsuarioDAO  usuarioDAO=new UsuarioDAO();
 				//GestionUsuario gestionUsuario = new GestionUsuario();
 
-				UsuarioIO usuarioIO=new UsuarioIO();
+				UsuarioTO usuarioTO=new UsuarioTO();
 				//Usuario usuario2 = new Usuario();
 				
-				usuarioIO.setUsuario(usuario);
-				usuarioIO.setClave(clave);
+				usuarioTO.setUsuario(usuario);
+				usuarioTO.setClave(clave);
 
 				//Usuario usu = gestionUsuario.obtenerUsuario(usuario2);
-				UsuarioIO usu = usuarioDAO.obtenerUsuario(usuarioIO);
+				UsuarioTO usu = usuarioDAO.obtenerUsuario(usuarioTO);
 
 				
 				if (usu != null) {
