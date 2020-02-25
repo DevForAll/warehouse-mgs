@@ -15,6 +15,13 @@ import java.awt.SystemColor;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.Dialog.ModalExclusionType;
+import javax.swing.JLabel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrmPrincipal extends JFrame {
 
@@ -40,15 +47,16 @@ public class FrmPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmPrincipal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmPrincipal.class.getResource("/cjava/imagenes/MGSOLUTIONS.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 786, 427);
+		setBounds(100, 100, 786, 557);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnEntrada = new JButton("");
-		btnEntrada.addActionListener(new ActionListener() {
+		JButton btnNuevaEntrada = new JButton("");
+		btnNuevaEntrada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				FormNewEntrada  NewEntrada = new FormNewEntrada();
@@ -56,45 +64,186 @@ public class FrmPrincipal extends JFrame {
 		
 			}
 		});
-		btnEntrada.setBackground(UIManager.getColor("Button.background"));
-		btnEntrada.setForeground(Color.LIGHT_GRAY);
-		btnEntrada.setIcon(new ImageIcon("C:\\Users\\MG_KEVIN\\git\\warehouse-mgs\\AppAlmacen\\src\\cjava\\imagenes\\+entrada.png"));
-		btnEntrada.setBounds(10, 224, 138, 153);
-		contentPane.add(btnEntrada);
+		btnNuevaEntrada.setBackground(UIManager.getColor("Button.background"));
+		btnNuevaEntrada.setForeground(Color.LIGHT_GRAY);
+		btnNuevaEntrada.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/029-package.png")));
+		btnNuevaEntrada.setBounds(161, 70, 138, 122);
+		contentPane.add(btnNuevaEntrada);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 706, 28);
+		menuBar.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		menuBar.setBounds(0, 0, 760, 48);
 		contentPane.add(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Proveedor");
+		mnNewMenu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				FrmProveedor Proveedor = new FrmProveedor();
+				Proveedor.setVisible(true);
+			}
+		});
+	
+		mnNewMenu.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		mnNewMenu.setHorizontalAlignment(SwingConstants.CENTER);
+		mnNewMenu.setBackground(new Color(240, 240, 240));
+		mnNewMenu.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/029-add-1.png")));
 		menuBar.add(mnNewMenu);
 		
 		JMenu mnNewMenu_1 = new JMenu("Empleado");
+		mnNewMenu_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				FrmProveedor Proveedor = new FrmProveedor();
+				Proveedor.setVisible(true);
+				
+			}
+		});
+		
+		
+		mnNewMenu_1.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		mnNewMenu_1.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/003-add-user.png")));
 		menuBar.add(mnNewMenu_1);
 		
+		JMenu mnNewMenu_5 = new JMenu("Especialidad");
+		mnNewMenu_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				FrmProveedor Proveedor = new FrmProveedor();
+				Proveedor.setVisible(true);
+				
+			}
+		});
+		mnNewMenu_5.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		mnNewMenu_5.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/034-favourites.png")));
+		menuBar.add(mnNewMenu_5);
+		
 		JMenu mnNewMenu_2 = new JMenu("Usuario");
+		mnNewMenu_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				FrmProveedor Proveedor = new FrmProveedor();
+				Proveedor.setVisible(true);
+				
+			}
+		});
+		mnNewMenu_2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		mnNewMenu_2.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/033-user.png")));
 		menuBar.add(mnNewMenu_2);
 		
 		JMenu mnNewMenu_3 = new JMenu("Configuraciones");
+		mnNewMenu_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				FrmProveedor Proveedor = new FrmProveedor();
+				Proveedor.setVisible(true);
+				
+			}
+		});
+		mnNewMenu_3.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		mnNewMenu_3.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/043-settings.png")));
 		menuBar.add(mnNewMenu_3);
 		
 		JMenu mnNewMenu_4 = new JMenu("Acerca de");
+		mnNewMenu_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			
+				FrmProveedor Proveedor = new FrmProveedor();
+				Proveedor.setVisible(true);
+				
+			}
+		});
+		mnNewMenu_4.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		mnNewMenu_4.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/MG_LOGO - 10.png")));
 		menuBar.add(mnNewMenu_4);
 		
-		JButton btnNewButton_3_1 = new JButton("REPORTE ENTRADA");
-		btnNewButton_3_1.setBounds(158, 224, 144, 153);
-		contentPane.add(btnNewButton_3_1);
+		JButton btnReporteEntrada = new JButton("");
+		btnReporteEntrada.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/023-list.png")));
+		btnReporteEntrada.setBounds(544, 70, 144, 122);
+		contentPane.add(btnReporteEntrada);
 		
-		JButton btnNewButton_3_1_1 = new JButton("SALIDA ENTRADA");
-		btnNewButton_3_1_1.setBounds(312, 224, 144, 153);
-		contentPane.add(btnNewButton_3_1_1);
+		JButton btnInventario = new JButton("");
+		btnInventario.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/047-shelf.png")));
+		btnInventario.setBounds(349, 201, 144, 122);
+		contentPane.add(btnInventario);
 		
-		JButton btnNewButton_3_1_2 = new JButton("NUEVA SALIDA");
-		btnNewButton_3_1_2.setBounds(466, 224, 144, 153);
-		contentPane.add(btnNewButton_3_1_2);
+		JLabel lblNewLabel = new JLabel("ENTRADA");
+		lblNewLabel.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/045-plus.png")));
+		lblNewLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setBounds(161, 182, 138, 49);
+		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton_3_1_3 = new JButton("INVENTARIO");
-		btnNewButton_3_1_3.setBounds(620, 224, 144, 153);
-		contentPane.add(btnNewButton_3_1_3);
+		JLabel lblInventario = new JLabel("INVENTARIO");
+		lblInventario.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/004-bookmarks.png")));
+		lblInventario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInventario.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblInventario.setBounds(332, 323, 172, 42);
+		contentPane.add(lblInventario);
+		
+		JLabel lblReporte = new JLabel("REPORTE");
+		lblReporte.setVerticalAlignment(SwingConstants.TOP);
+		lblReporte.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/028-download.png")));
+		lblReporte.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblReporte.setBounds(544, 189, 144, 42);
+		contentPane.add(lblReporte);
+		
+		JLabel lblEntrada = new JLabel("ENTRADA");
+		lblEntrada.setVerticalAlignment(SwingConstants.TOP);
+		lblEntrada.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEntrada.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblEntrada.setBounds(564, 218, 124, 30);
+		contentPane.add(lblEntrada);
+		
+		JButton btnNuevaSalida = new JButton("");
+		btnNuevaSalida.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			
+				FrmNewSalida  Salida = new FrmNewSalida();
+				Salida.setVisible(true);
+				
+			}
+			
+			
+		});
+		btnNuevaSalida.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/021-add-to-cart.png")));
+		btnNuevaSalida.setForeground(Color.LIGHT_GRAY);
+		btnNuevaSalida.setBackground(SystemColor.menu);
+		btnNuevaSalida.setBounds(171, 323, 138, 122);
+		contentPane.add(btnNuevaSalida);
+		
+		JButton btnReporteSalida = new JButton("");
+		btnReporteSalida.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/023-list.png")));
+		btnReporteSalida.setBounds(544, 329, 144, 122);
+		contentPane.add(btnReporteSalida);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("SALIDA");
+		lblNewLabel_1_1.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/090-plus.png")));
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_1_1.setBounds(171, 447, 138, 40);
+		contentPane.add(lblNewLabel_1_1);
+		
+		JLabel lblReporte_1 = new JLabel("REPORTE");
+		lblReporte_1.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/028-download.png")));
+		lblReporte_1.setVerticalAlignment(SwingConstants.TOP);
+		lblReporte_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblReporte_1.setBounds(544, 450, 144, 42);
+		contentPane.add(lblReporte_1);
+		
+		JLabel lblSalida = new JLabel("SALIDA");
+		lblSalida.setVerticalAlignment(SwingConstants.TOP);
+		lblSalida.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSalida.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblSalida.setBounds(564, 472, 124, 25);
+		contentPane.add(lblSalida);
 	}
 }

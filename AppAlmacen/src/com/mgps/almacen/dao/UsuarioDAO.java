@@ -32,14 +32,14 @@ public UsuarioTO obtenerUsuario(UsuarioTO usu){
 			
 			pst = con.prepareStatement(sql);
 			
-			pst.setString(1, usu.getUsuario());
-			pst.setString(2, usu.getClave());
+		//	pst.setString(1, usu.login());
+		//	pst.setString(2, usu.password());
 			
 			rs = pst.executeQuery();
 			
 			while (rs.next()) {
-				usuario = new UsuarioTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-				
+			//	usuario = new UsuarioTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				//
 			}
 			
 			
