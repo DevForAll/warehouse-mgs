@@ -6,6 +6,7 @@ public class EmpleadoTO {
 	private String nombre;
 	private String email;
 	private String dni;
+	private Especialidad especialidad;
 	
 	public EmpleadoTO() {
 	}
@@ -56,6 +57,14 @@ public class EmpleadoTO {
 
 	public void setDni(String dni) {
 		this.dni = dni;
+	}
+
+	public Especialidad getEspecialidad() {
+		return especialidad;
+	}
+
+	public void setEspecialidad(Especialidad especialidad) {
+		this.especialidad = especialidad;
 	}
 	
 }

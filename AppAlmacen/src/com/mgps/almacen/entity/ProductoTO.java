@@ -12,7 +12,7 @@ public class ProductoTO {
 	private float precioCompra;
 	private int stock;
 	private int minStock;
-	private String vencimiento;
+	private String ven;
 	private Date fechaVen;
 	
 	public ProductoTO() {
@@ -20,7 +20,7 @@ public class ProductoTO {
 
 	public ProductoTO(int idproducto, String descripcion, CategoriaTO categoriaTO, MarcaTO marcaTO,
 			UnidadMedidaTO unidadMedidoTO, String ubicacion, float precioCompra, int stock, int minStock,
-			String vencimiento, Date fechaVen) {
+			String ven, Date fechaVen) {
 		this.idproducto = idproducto;
 		this.descripcion = descripcion;
 		this.categoriaTO = categoriaTO;
@@ -30,7 +30,7 @@ public class ProductoTO {
 		this.precioCompra = precioCompra;
 		this.stock = stock;
 		this.minStock = minStock;
-		this.vencimiento = vencimiento;
+		this.ven = ven;
 		this.fechaVen = fechaVen;
 	}
 
@@ -106,12 +106,12 @@ public class ProductoTO {
 		this.minStock = minStock;
 	}
 
-	public String getVencimiento() {
-		return vencimiento;
+	public String getVen() {
+		return ven;
 	}
 
-	public void setVencimiento(String vencimiento) {
-		this.vencimiento = vencimiento;
+	public void setVen(String ven) {
+		this.ven = ven;
 	}
 
 	public Date getFechaVen() {
