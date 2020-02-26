@@ -16,6 +16,9 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import java.awt.Choice;
+import com.toedter.components.JLocaleChooser;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.SwingConstants;
 
 public class FrmReporteSalida extends JFrame {
 
@@ -63,18 +66,19 @@ public class FrmReporteSalida extends JFrame {
 		contentPane.add(contentPane_1);
 		
 		JLabel lblFecha = new JLabel("FECHA INICIO:");
+		lblFecha.setVerticalAlignment(SwingConstants.TOP);
 		lblFecha.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblFecha.setBounds(247, 24, 110, 16);
+		lblFecha.setBounds(284, 25, 110, 16);
 		contentPane_1.add(lblFecha);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(121, 52, 273, 28);
+		textField_1.setBounds(121, 52, 240, 28);
 		contentPane_1.add(textField_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(121, 83, 273, 28);
+		textField_2.setBounds(121, 83, 240, 28);
 		contentPane_1.add(textField_2);
 		
 		JLabel lblNombre = new JLabel("NOMBRE :");
@@ -95,12 +99,16 @@ public class FrmReporteSalida extends JFrame {
 		
 		JLabel lblFechaFinal = new JLabel("FECHA FINAL");
 		lblFechaFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblFechaFinal.setBounds(408, 26, 110, 16);
+		lblFechaFinal.setBounds(472, 25, 110, 16);
 		contentPane_1.add(lblFechaFinal);
 		
-		Choice choice = new Choice();
-		choice.setBounds(482, 52, 135, 20);
-		contentPane_1.add(choice);
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(367, 25, 95, 33);
+		contentPane_1.add(dateChooser);
+		
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(564, 22, 95, 33);
+		contentPane_1.add(dateChooser_1);
 		
 		JButton btnImprimir = new JButton("Imprimir");
 		btnImprimir.setBounds(538, 464, 140, 48);
