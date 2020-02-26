@@ -8,20 +8,19 @@ public class InventarioEntradaTO {
 	private Date inventarioFecha;
 	private UsuarioTO usuarioTO;
 	private ProveedorTO proveedorTO;
-	private ProductoTO productoTO;
 	private int preTotal;
 	
 	public InventarioEntradaTO() {
 	}
 
 	public InventarioEntradaTO(int inventarioCod, String inventarioOrdenCompra, Date inventarioFecha,
-			UsuarioTO usuarioTO, ProveedorTO proveedorTO, ProductoTO productoTO, int preTotal) {
+			UsuarioTO usuarioTO, ProveedorTO proveedorTO, int preTotal) {
+		super();
 		this.inventarioCod = inventarioCod;
 		this.inventarioOrdenCompra = inventarioOrdenCompra;
 		this.inventarioFecha = inventarioFecha;
 		this.usuarioTO = usuarioTO;
 		this.proveedorTO = proveedorTO;
-		this.productoTO = productoTO;
 		this.preTotal = preTotal;
 	}
 
@@ -63,14 +62,6 @@ public class InventarioEntradaTO {
 
 	public void setProveedorTO(ProveedorTO proveedorTO) {
 		this.proveedorTO = proveedorTO;
-	}
-
-	public ProductoTO getProductoTO() {
-		return productoTO;
-	}
-
-	public void setProductoTO(ProductoTO productoTO) {
-		this.productoTO = productoTO;
 	}
 
 	public int getPreTotal() {

@@ -7,19 +7,35 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
+import com.mgps.almacen.controller.EspecialidadBLL;
+import com.mgps.almacen.entity.EspecialidadTO;
+
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmEspecialidad extends JFrame {
 
+	
+
+	EspecialidadBLL obj = new EspecialidadBLL();
+	EspecialidadTO pr;
+	
+	
+	
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField txtNombreEspecialidad;
-	private JTextField textField_4;
+	private JTextField txtNombre;
+	private JTextField txtDescripcion;
 
 	/**
 	 * Launch the application.
@@ -37,12 +53,54 @@ public class FrmEspecialidad extends JFrame {
 		});
 	}
 
+
+	private void DatosCategoria() {
+        pr = new EspecialidadTO();
+        pr.setNombre(txtNombre.getText());
+        pr.setDescripcion(txtDescripcion.getText());
+       // pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
+        
+    }
+
+
+    private void procesar(int op) {
+    	DatosCategoria();// llama a metodo
+        String msg = "";
+        int result;
+        try {
+            switch (op) {
+                case 1: // adiciona
+                    result = obj.EspecialidadAdicionar(pr);
+                    msg = "Especialidad registrado con exito";
+                    break;
+                case 2://actualiza
+               //     pr.setIdempleado(txtIdEmpleado.getText());
+                //    result = obj.EmpleadoActualizar(pr);
+             //       msg = "Empleado actualizado con exito";
+                //    break;
+                case 3://elimina
+               //     pr.setIdempleado(txtIdEmpleado.getText());
+              //      result = obj.EmpleadoEliminar(pr);
+              //      msg = "Empleado eliminado con exito";
+                    break;
+            }
+            JOptionPane.showMessageDialog(this, msg);
+         //   listaEmpleados();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+
+    }
+	
+	
+	
+	
 	/**
 	 * Create the frame.
 	 */
 	public FrmEspecialidad() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 284);
+		setBounds(100, 100, 483, 304);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -50,62 +108,68 @@ public class FrmEspecialidad extends JFrame {
 		
 		JPanel contentPane_1 = new JPanel();
 		contentPane_1.setLayout(null);
-		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane_1.setBounds(20, 33, 394, 208);
+		contentPane_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		contentPane_1.setBounds(20, 46, 424, 205);
 		contentPane.add(contentPane_1);
 		
 		JLabel lblCodigoEnmpleado = new JLabel("CODIGO");
 		lblCodigoEnmpleado.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblCodigoEnmpleado.setBounds(182, 28, 62, 14);
+		lblCodigoEnmpleado.setBounds(235, 30, 62, 14);
 		contentPane_1.add(lblCodigoEnmpleado);
 		
 		textField = new JTextField();
 		textField.setEnabled(false);
 		textField.setColumns(10);
-		textField.setBounds(254, 22, 86, 20);
+		textField.setBounds(307, 24, 86, 20);
 		contentPane_1.add(textField);
 		
-		txtNombreEspecialidad = new JTextField();
-		txtNombreEspecialidad.setColumns(10);
-		txtNombreEspecialidad.setBounds(110, 50, 231, 28);
-		contentPane_1.add(txtNombreEspecialidad);
+		txtNombre = new JTextField();
+		txtNombre.setColumns(10);
+		txtNombre.setBounds(121, 52, 273, 28);
+		contentPane_1.add(txtNombre);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(110, 81, 231, 28);
-		contentPane_1.add(textField_4);
+		txtDescripcion = new JTextField();
+		txtDescripcion.setColumns(10);
+		txtDescripcion.setBounds(121, 83, 273, 28);
+		contentPane_1.add(txtDescripcion);
 		
 		JLabel lblNombre = new JLabel("NOMBRE :");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNombre.setBounds(11, 56, 86, 14);
+		lblNombre.setBounds(25, 60, 86, 14);
 		contentPane_1.add(lblNombre);
 		
 		JLabel lblDescripcion = new JLabel("DESCRIPCION :");
 		lblDescripcion.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDescripcion.setBounds(11, 87, 110, 20);
+		lblDescripcion.setBounds(25, 91, 110, 20);
 		contentPane_1.add(lblDescripcion);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				procesar(1);
+			}
+		});
 		btnGuardar.setIcon(new ImageIcon(FrmEspecialidad.class.getResource("/cjava/imagenes/035-save.png")));
 		btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnGuardar.setBounds(257, 149, 127, 48);
+		btnGuardar.setBounds(274, 149, 140, 48);
 		contentPane_1.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setIcon(new ImageIcon(FrmEspecialidad.class.getResource("/cjava/imagenes/041-pencil.png")));
 		btnEditar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnEditar.setBounds(135, 149, 111, 48);
+		btnEditar.setBounds(157, 149, 111, 48);
 		contentPane_1.add(btnEditar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setIcon(new ImageIcon(FrmEspecialidad.class.getResource("/cjava/imagenes/042-multiply-1.png")));
 		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnEliminar.setBounds(-9, 149, 134, 48);
+		btnEliminar.setBounds(10, 149, 134, 48);
 		contentPane_1.add(btnEliminar);
 		
 		JLabel lblEspecialidad = new JLabel("ESPECIALIDAD");
 		lblEspecialidad.setIcon(new ImageIcon(FrmEspecialidad.class.getResource("/cjava/imagenes/034-favourites.png")));
-		lblEspecialidad.setBounds(10, 0, 414, 35);
+		lblEspecialidad.setBounds(20, 11, 424, 35);
 		contentPane.add(lblEspecialidad);
 		lblEspecialidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEspecialidad.setFont(new Font("Tahoma", Font.BOLD, 19));

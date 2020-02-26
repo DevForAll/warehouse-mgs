@@ -96,8 +96,8 @@ public class FrmPrincipal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				FrmProveedor Proveedor = new FrmProveedor();
-				Proveedor.setVisible(true);
+				FrmEmpleados Empleado = new FrmEmpleados();
+				Empleado.setVisible(true);
 				
 			}
 		});
@@ -112,8 +112,8 @@ public class FrmPrincipal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				FrmProveedor Proveedor = new FrmProveedor();
-				Proveedor.setVisible(true);
+				FrmEspecialidad Especialidad = new FrmEspecialidad();
+				Especialidad.setVisible(true);
 				
 			}
 		});
@@ -126,8 +126,8 @@ public class FrmPrincipal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				FrmProveedor Proveedor = new FrmProveedor();
-				Proveedor.setVisible(true);
+				FrmUsuario Usuario = new FrmUsuario();
+				Usuario.setVisible(true);
 				
 			}
 		});
@@ -139,9 +139,7 @@ public class FrmPrincipal extends JFrame {
 		mnNewMenu_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				FrmProveedor Proveedor = new FrmProveedor();
-				Proveedor.setVisible(true);
+	
 				
 			}
 		});
@@ -149,13 +147,56 @@ public class FrmPrincipal extends JFrame {
 		mnNewMenu_3.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/043-settings.png")));
 		menuBar.add(mnNewMenu_3);
 		
+		JMenu mnNewMenu_6 = new JMenu("Categoria");
+		mnNewMenu_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				
+				FrmCategoria Categoria = new FrmCategoria();
+				Categoria.setVisible(true);
+			}
+		});
+		mnNewMenu_6.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/007-share.png")));
+		mnNewMenu_6.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		mnNewMenu_3.add(mnNewMenu_6);
+		
+		JMenu mnNewMenu_7 = new JMenu("Unidad de Medida");
+		mnNewMenu_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				FrmUnidadMedida UnidadMedida = new FrmUnidadMedida();
+				UnidadMedida.setVisible(true);
+				
+				
+			}
+		});
+		mnNewMenu_7.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/021-sign.png")));
+		mnNewMenu_7.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		mnNewMenu_3.add(mnNewMenu_7);
+		
+		JMenu mnNewMenu_8 = new JMenu("Marca");
+		mnNewMenu_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				FrmMarca Marca = new FrmMarca();
+				Marca.setVisible(true);
+				
+			}
+		});
+		mnNewMenu_8.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/035-flag.png")));
+		mnNewMenu_8.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		mnNewMenu_3.add(mnNewMenu_8);
+		
 		JMenu mnNewMenu_4 = new JMenu("Acerca de");
 		mnNewMenu_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			
-				FrmProveedor Proveedor = new FrmProveedor();
-				Proveedor.setVisible(true);
+				FrmMgSolutionsPeru MgSolutionsPeru = new FrmMgSolutionsPeru();
+				MgSolutionsPeru.setVisible(true);
 				
 			}
 		});

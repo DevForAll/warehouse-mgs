@@ -59,7 +59,8 @@ public class FrmNewSalida extends JFrame {
 		contentPane.add(contentPane_1);
 		
 		JLabel lblUsuario = new JLabel(" Usuario :");
-		lblUsuario.setBounds(594, 94, 46, 14);
+		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblUsuario.setBounds(554, 93, 86, 14);
 		contentPane_1.add(lblUsuario);
 		
 		textField = new JTextField();
@@ -69,7 +70,8 @@ public class FrmNewSalida extends JFrame {
 		contentPane_1.add(textField);
 		
 		JLabel lblFechaHora = new JLabel("Fecha y Hora :");
-		lblFechaHora.setBounds(561, 119, 79, 17);
+		lblFechaHora.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblFechaHora.setBounds(535, 119, 105, 17);
 		contentPane_1.add(lblFechaHora);
 		
 		textField_1 = new JTextField();
@@ -79,7 +81,8 @@ public class FrmNewSalida extends JFrame {
 		contentPane_1.add(textField_1);
 		
 		JLabel lblEmpleado = new JLabel("EMPLEADO");
-		lblEmpleado.setBounds(34, 169, 65, 14);
+		lblEmpleado.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblEmpleado.setBounds(34, 169, 88, 23);
 		contentPane_1.add(lblEmpleado);
 		
 		textField_2 = new JTextField();
@@ -88,7 +91,7 @@ public class FrmNewSalida extends JFrame {
 		contentPane_1.add(textField_2);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(109, 169, 416, 23);
+		comboBox.setBounds(132, 169, 393, 23);
 		contentPane_1.add(comboBox);
 		
 		JButton btnNewButton = new JButton("");
@@ -103,7 +106,8 @@ public class FrmNewSalida extends JFrame {
 		contentPane_1.add(scrollPane);
 		
 		JLabel lblPrecioTotal = new JLabel("Precio Total :");
-		lblPrecioTotal.setBounds(624, 424, 79, 14);
+		lblPrecioTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPrecioTotal.setBounds(607, 424, 96, 14);
 		contentPane_1.add(lblPrecioTotal);
 		
 		JButton btnNewButton_1 = new JButton("Productos");
@@ -139,23 +143,25 @@ public class FrmNewSalida extends JFrame {
 		contentPane_1.add(btnNewButton_1_2);
 		
 		JLabel lblOrdenDeSalida = new JLabel("ORDEN DE SALIDA");
-		lblOrdenDeSalida.setBounds(34, 74, 128, 20);
+		lblOrdenDeSalida.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblOrdenDeSalida.setBounds(34, 90, 128, 20);
 		contentPane_1.add(lblOrdenDeSalida);
 		
 		textField_3 = new JTextField();
 		textField_3.setEnabled(false);
 		textField_3.setColumns(10);
-		textField_3.setBounds(130, 73, 149, 22);
+		textField_3.setBounds(168, 91, 149, 22);
 		contentPane_1.add(textField_3);
 		
 		JLabel lblCod = new JLabel("COD :");
-		lblCod.setBounds(34, 49, 35, 14);
+		lblCod.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCod.setBounds(34, 65, 35, 14);
 		contentPane_1.add(lblCod);
 		
 		textField_4 = new JTextField();
 		textField_4.setEnabled(false);
 		textField_4.setColumns(10);
-		textField_4.setBounds(130, 43, 79, 20);
+		textField_4.setBounds(130, 59, 79, 20);
 		contentPane_1.add(textField_4);
 		
 		JButton btnNewButton_1_2_1 = new JButton("Eliminar");
@@ -167,5 +173,12 @@ public class FrmNewSalida extends JFrame {
 		btnNewButton_1_2_1.setBackground(new Color(230, 230, 250));
 		btnNewButton_1_2_1.setBounds(501, 460, 139, 45);
 		contentPane_1.add(btnNewButton_1_2_1);
+		
+		JLabel lblSalidaDeProducto = new JLabel("   SALIDA DE PRODUCTO");
+		lblSalidaDeProducto.setIcon(new ImageIcon(FrmNewSalida.class.getResource("/cjava/imagenes/027-menu.png")));
+		lblSalidaDeProducto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSalidaDeProducto.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblSalidaDeProducto.setBounds(10, -3, 749, 41);
+		contentPane_1.add(lblSalidaDeProducto);
 	}
 }

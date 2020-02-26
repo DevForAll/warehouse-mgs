@@ -32,8 +32,8 @@ public UsuarioTO obtenerUsuario(UsuarioTO usu){
 			
 			pst = con.prepareStatement(sql);
 			
-		//	pst.setString(1, usu.login());
-		//	pst.setString(2, usu.password());
+			//pst.setString(1, usu.login());
+			//pst.setString(2, usu.password());
 			
 			rs = pst.executeQuery();
 			

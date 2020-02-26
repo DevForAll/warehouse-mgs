@@ -6,7 +6,7 @@ public class EmpleadoTO {
 	private String nombre;
 	private String email;
 	private String dni;
-	private Especialidad especialidad;
+	private EspecialidadTO especialidad;
 	
 	public EmpleadoTO() {
 	}
@@ -59,11 +59,11 @@ public class EmpleadoTO {
 		this.dni = dni;
 	}
 
-	public Especialidad getEspecialidad() {
+	public EspecialidadTO getEspecialidad() {
 		return especialidad;
 	}
 
-	public void setEspecialidad(Especialidad especialidad) {
+	public void setEspecialidad(EspecialidadTO especialidad) {
 		this.especialidad = especialidad;
 	}
 	

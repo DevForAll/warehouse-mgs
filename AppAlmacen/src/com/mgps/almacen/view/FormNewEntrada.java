@@ -117,7 +117,8 @@ public class FormNewEntrada extends JFrame {
 		table.setBackground(new Color(127, 255, 0));
 		
 		JLabel lblPrecioTotal = new JLabel("Precio Total :");
-		lblPrecioTotal.setBounds(624, 424, 79, 14);
+		lblPrecioTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPrecioTotal.setBounds(607, 424, 96, 14);
 		contentPane.add(lblPrecioTotal);
 		
 		JButton btnNewButton_1 = new JButton("Productos");
@@ -165,13 +166,13 @@ public class FormNewEntrada extends JFrame {
 		
 		JLabel lblCod = new JLabel("COD :");
 		lblCod.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblCod.setBounds(34, 49, 35, 14);
+		lblCod.setBounds(34, 88, 35, 20);
 		contentPane.add(lblCod);
 		
 		textField_2 = new JTextField();
 		textField_2.setEnabled(false);
 		textField_2.setColumns(10);
-		textField_2.setBounds(72, 46, 79, 20);
+		textField_2.setBounds(83, 92, 79, 20);
 		contentPane.add(textField_2);
 		
 		JButton btnNewButton_1_2_1 = new JButton("Eliminar");
@@ -183,5 +184,12 @@ public class FormNewEntrada extends JFrame {
 		btnNewButton_1_2_1.setBackground(new Color(230, 230, 250));
 		btnNewButton_1_2_1.setBounds(501, 460, 139, 45);
 		contentPane.add(btnNewButton_1_2_1);
+		
+		JLabel lblNuevaEntradaDe = new JLabel("NUEVA ENTRADA DE PRODUCTOS AL ALMACEN");
+		lblNuevaEntradaDe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNuevaEntradaDe.setIcon(new ImageIcon(FormNewEntrada.class.getResource("/cjava/imagenes/050-wallet.png")));
+		lblNuevaEntradaDe.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblNuevaEntradaDe.setBounds(29, 11, 749, 41);
+		contentPane.add(lblNuevaEntradaDe);
 	}
 }

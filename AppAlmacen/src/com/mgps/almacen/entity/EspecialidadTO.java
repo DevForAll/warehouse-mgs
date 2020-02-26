@@ -1,14 +1,14 @@
 package com.mgps.almacen.entity;
 
-public class Especialidad {
+public class EspecialidadTO {
 	private int idEspecialidad;
 	private String nombre;
 	private String descripcion;
 	
-	public Especialidad() {
+	public EspecialidadTO() {
 	}
 	
-	public Especialidad(int idEspecialidad, String nombre, String descripcion) {
+	public EspecialidadTO(int idEspecialidad, String nombre, String descripcion) {
 		this.idEspecialidad = idEspecialidad;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
