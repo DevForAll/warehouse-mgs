@@ -22,24 +22,23 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 public class FrmCategoria extends JFrame {
-
+	
 	CategoriaBLL obj = new CategoriaBLL();
 	CategoriaTO pr;
-	    
 	    
 	private JPanel contentPane;
 	private JTextField txtCodigo;
 	private JTextField txtNombre;
 	private JTextField txtDescripcion;
-	private JTable table;
-	private JTextField textField;
-	
-	
-
+	private JTextField txtIdCategoria;
+	private JTable tblCategoria;
 	/**
 	 * Launch the application.
 	 */
@@ -49,57 +48,19 @@ public class FrmCategoria extends JFrame {
 				try {
 					FrmCategoria frame = new FrmCategoria();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
 	
-	private void DatosCategoria() {
-        pr = new CategoriaTO();
-        pr.setNombre(txtNombre.getText());
-        pr.setDescripcion(txtDescripcion.getText());
-     // pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
-        
-    }
-
-    private void procesar(int op) {
-    	DatosCategoria();// llama a metodo
-        String msg = "";
-        int result;
-        try {
-            switch (op) {
-                case 1: // adiciona
-                    result = obj.CategoriaAdicionar(pr);
-                    msg = "Categoria registrado con exito";
-                    break;
-                case 2://actualiza  getIdCategoria
-						 pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
-						 result = obj.CategoriaActualizar(pr);
-						 msg = "Categoria actualizado con exito";
-	                break;
-                case 3://elimina
-               //     pr.setIdempleado(txtIdEmpleado.getText());
-              //      result = obj.EmpleadoEliminar(pr);
-              //      msg = "Empleado eliminado con exito";
-                    break;
-            }
-            JOptionPane.showMessageDialog(this, msg);
-         //   listaEmpleados();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-
-    }
-	
-	
-	
 	public FrmCategoria() {
+		listaCategorias();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmCategoria.class.getResource("/cjava/imagenes/MGSOLUTIONS.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 873, 445);
@@ -184,23 +145,117 @@ public class FrmCategoria extends JFrame {
 		btnEliminar.setBounds(10, 149, 134, 48);
 		contentPane_1.add(btnEliminar);
 		
-		table = new JTable();
-		table.setBackground(Color.GRAY);
-		table.setBounds(469, 101, 362, 288);
-		contentPane.add(table);
+		txtIdCategoria = new JTextField();
+		txtIdCategoria.setColumns(10);
+		txtIdCategoria.setBounds(554, 70, 86, 20);
+		contentPane.add(txtIdCategoria);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(554, 70, 86, 20);
-		contentPane.add(textField);
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnBuscar.setBounds(680, 48, 140, 48);
+		contentPane.add(btnBuscar);
 		
-		JButton btnGuardar_1 = new JButton("Guardar");
-		btnGuardar_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnGuardar_1.setBounds(680, 48, 140, 48);
-		contentPane.add(btnGuardar_1);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(493, 120, 316, 123);
+		contentPane.add(scrollPane);
 		
+		tblCategoria = new JTable();
+		listaCategorias();
+		tblCategoria.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"C\u00F3digo", "Nombre", "Descripci\u00F3n"
+			}
+		));
+		tblCategoria.getColumnModel().getColumn(0).setPreferredWidth(50);
+		tblCategoria.getColumnModel().getColumn(1).setPreferredWidth(171);
+		tblCategoria.getColumnModel().getColumn(2).setPreferredWidth(362);
+		scrollPane.setViewportView(tblCategoria);
+//		if (tblCategoria.getColumnModel().getColumnCount() > 0) {
+//			tblCategoria.getColumnModel().getColumn(0).setPreferredWidth(50);
+//			tblCategoria.getColumnModel().getColumn(1).setPreferredWidth(171);
+//			tblCategoria.getColumnModel().getColumn(2).setPreferredWidth(362);
+//		}
 		
 
 
 	}
+	
+	private void DatosCategoria() {
+        pr = new CategoriaTO();
+        pr.setNombre(txtNombre.getText());
+        pr.setDescripcion(txtDescripcion.getText());
+     // pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
+        
+    }
+
+    private void procesar(int op) {
+    	DatosCategoria();// llama a metodo
+        String msg = "";
+        int result;
+        try {
+            switch (op) {
+                case 1: // adiciona
+                    result = obj.CategoriaAdicionar(pr);
+                    msg = "Categoria registrado con exito";
+                    break;
+                case 2://actualiza  getIdCategoria
+						 pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
+						 result = obj.CategoriaActualizar(pr);
+						 msg = "Categoria actualizado con exito";
+	                break;
+                case 3://elimina
+               //     pr.setIdempleado(txtIdEmpleado.getText());
+              //      result = obj.EmpleadoEliminar(pr);
+              //      msg = "Empleado eliminado con exito";
+                    break;
+            }
+            JOptionPane.showMessageDialog(this, msg);
+         //   listaEmpleados();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+
+    }
+    
+    public void listaCategorias() {
+    	try {
+			List<CategoriaTO> lista = obj.CategoriaListar();
+			verCategorias(lista);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
+    }
+    
+    private void verCategorias(List<CategoriaTO> lista) {
+        // variable de tipo tabla
+        DefaultTableModel model = new DefaultTableModel();
+        model.setRowCount(0);
+        for (CategoriaTO x : lista) {
+            Object[] dato = {
+            	x.getIdCategoria(),
+                x.getNombre(),
+                x.getDescripcion()};
+            model.addRow(dato);
+        }
+    }
+    
+    private void mostrar() {
+    	try {
+			pr = obj.CategoriaBuscar(txtIdCategoria.getText());
+			if (pr != null) {
+				// FATAL LOGICA	TODO
+            } else {
+                JOptionPane.showMessageDialog(this, "Empleado no existe...");
+            }
+		} catch (Exception e) {
+			
+		}
+    }
+    
 }

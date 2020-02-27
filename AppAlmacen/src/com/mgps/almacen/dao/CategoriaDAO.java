@@ -30,6 +30,7 @@ public class CategoriaDAO implements ICrudDao<CategoriaTO>  {
 	  CategoriaTO cat = null;
 	  final String SQL_ADICIONAR = "{call SP_CATEGORIA_INSERTAR(?,?,?)}";
 	  final String SQL_ACTUALIZAR = "{call SP_CATEGORIA_ACTUALIZAR(?,?,?)}";
+	  final String SQL_SELECT = "{CALL SP_CATEGORIA_LISTAR}";
 	  
   private int generaCodigo() throws SQLException {
     sql = "SELECT MAX(CATE_IDCATEGORIA)+ 1 FROM TB_CATEGORIAS    LIMIT 1 ";
@@ -103,29 +104,20 @@ public class CategoriaDAO implements ICrudDao<CategoriaTO>  {
 	}
     return ok;
  }
-   
-   
-   
-    
-   
-   
-   
  
- 
-
  @Override
  public List<CategoriaTO> readAll() throws Exception {
    lista = new ArrayList<>();
    try {
      cn = ConexionDB.getConexion2020();
-     sql = "select * from TB_CATEGORIAS order by CATE_IDCATEGORIA;";
+     sql = "select * from TB_CATEGORIAS";
      stm = cn.createStatement();
      //ejecutar comando
      rs = stm.executeQuery(sql);
      while (rs.next()) {
        cat = new CategoriaTO();
-       cat.setIdCategoria(rs.getInt("CATE_IDCATEGORIA"));
-       cat.setNombre(rs.getString("CATE_NOMBRE"));
+       cat.setIdCategoria(rs.getInt(1));
+       cat.setNombre(rs.getString(2));
        lista.add(cat);
      }
      rs.close();
@@ -146,8 +138,25 @@ public class CategoriaDAO implements ICrudDao<CategoriaTO>  {
 
  @Override
  public CategoriaTO find(Object t) throws Exception {
-	// TODO Auto-generated method stub
-	 return null;
+	 cat = null;
+	 try {
+		cn = ConexionDB.getConexion2020();
+		ps = cn.prepareStatement("select * from TB_CATEGORIAS where CATE_IDCATEGORIA=?");
+		ps.setString(1, (String) t);
+		rs = ps.executeQuery();
+		if (rs.next()) {
+			cat = new CategoriaTO();
+			cat.setIdCategoria(Integer.parseInt(rs.getString(1)));
+			cat.setNombre(rs.getString(2));
+			cat.setDescripcion(rs.getString(3));
+		}
+		rs.close();
+		ps.close();
+	} catch (SQLException e) {
+		throw e;
+	} finally {
+	}
+	 return cat;
  }
 
  @Override
