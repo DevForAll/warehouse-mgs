@@ -15,6 +15,7 @@ import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
 
 public class FrmNewSalida extends JFrame {
 
@@ -24,6 +25,7 @@ public class FrmNewSalida extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -101,10 +103,6 @@ public class FrmNewSalida extends JFrame {
 		btnNewButton.setBounds(535, 158, 46, 41);
 		contentPane_1.add(btnNewButton);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(739, 376, -674, -100);
-		contentPane_1.add(scrollPane);
-		
 		JLabel lblPrecioTotal = new JLabel("Precio Total :");
 		lblPrecioTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblPrecioTotal.setBounds(607, 424, 96, 14);
@@ -180,5 +178,10 @@ public class FrmNewSalida extends JFrame {
 		lblSalidaDeProducto.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblSalidaDeProducto.setBounds(10, -3, 749, 41);
 		contentPane_1.add(lblSalidaDeProducto);
+		
+		table = new JTable();
+		table.setBackground(Color.GRAY);
+		table.setBounds(16, 259, 783, 153);
+		contentPane_1.add(table);
 	}
 }

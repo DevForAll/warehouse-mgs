@@ -49,7 +49,7 @@ public class FrmPrincipal extends JFrame {
 	public FrmPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmPrincipal.class.getResource("/cjava/imagenes/MGSOLUTIONS.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 786, 557);
+		setBounds(100, 100, 868, 557);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -59,7 +59,7 @@ public class FrmPrincipal extends JFrame {
 		btnNuevaEntrada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				FormNewEntrada  NewEntrada = new FormNewEntrada();
+				FrmNewEntrada  NewEntrada = new FrmNewEntrada();
 				NewEntrada.setVisible(true);
 		
 			}
@@ -72,7 +72,7 @@ public class FrmPrincipal extends JFrame {
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		menuBar.setBounds(0, 0, 760, 48);
+		menuBar.setBounds(0, 0, 842, 48);
 		contentPane.add(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Proveedor");
@@ -117,6 +117,20 @@ public class FrmPrincipal extends JFrame {
 				
 			}
 		});
+		
+		JMenu mnNewMenu_1_1 = new JMenu("Productos");
+		mnNewMenu_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				FrmProducto Productos = new FrmProducto();
+				Productos.setVisible(true);
+				
+			}
+		});
+		mnNewMenu_1_1.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/027-shopping-cart.png")));
+		mnNewMenu_1_1.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		menuBar.add(mnNewMenu_1_1);
 		mnNewMenu_5.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		mnNewMenu_5.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/cjava/imagenes/034-favourites.png")));
 		menuBar.add(mnNewMenu_5);

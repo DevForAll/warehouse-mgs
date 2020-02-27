@@ -76,10 +76,10 @@ public class FrmUnidadMedida extends JFrame {
                     msg = "Unidad de Medida registrado con exito";
                     break;
                 case 2://actualiza
-               //     pr.setIdempleado(txtIdEmpleado.getText());
-                //    result = obj.EmpleadoActualizar(pr);
-             //       msg = "Empleado actualizado con exito";
-                //    break;
+                    pr.setCod((Integer.parseInt(txtCodigo.getText())));
+                result = obj.UnidadMedidActualizar(pr);
+               msg = "Unidad de Medida actualizado con exito";
+             break;
                 case 3://elimina
                //     pr.setIdempleado(txtIdEmpleado.getText());
               //      result = obj.EmpleadoEliminar(pr);
@@ -137,7 +137,6 @@ public class FrmUnidadMedida extends JFrame {
 		contentPane_1_1.add(lblCodigoEnmpleado);
 		
 		txtCodigo = new JTextField();
-		txtCodigo.setEnabled(false);
 		txtCodigo.setColumns(10);
 		txtCodigo.setBounds(307, 24, 86, 20);
 		contentPane_1_1.add(txtCodigo);
@@ -175,6 +174,13 @@ public class FrmUnidadMedida extends JFrame {
 		contentPane_1_1.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				procesar(2);
+				
+			}
+		});
 		btnEditar.setIcon(new ImageIcon(FrmUnidadMedida.class.getResource("/cjava/imagenes/041-pencil.png")));
 		btnEditar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEditar.setBounds(157, 149, 111, 48);

@@ -33,7 +33,7 @@ public class FrmEspecialidad extends JFrame {
 	
 	
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField txtCodigo;
 	private JTextField txtNombre;
 	private JTextField txtDescripcion;
 
@@ -74,10 +74,10 @@ public class FrmEspecialidad extends JFrame {
                     msg = "Especialidad registrado con exito";
                     break;
                 case 2://actualiza
-               //     pr.setIdempleado(txtIdEmpleado.getText());
-                //    result = obj.EmpleadoActualizar(pr);
-             //       msg = "Empleado actualizado con exito";
-                //    break;
+                	pr.setIdEspecialidad((Integer.parseInt(txtCodigo.getText())));
+                result = obj.EspecialidadActualizar(pr);
+               msg = "Especialidad actualizado con exito";
+                 break;
                 case 3://elimina
                //     pr.setIdempleado(txtIdEmpleado.getText());
               //      result = obj.EmpleadoEliminar(pr);
@@ -117,11 +117,10 @@ public class FrmEspecialidad extends JFrame {
 		lblCodigoEnmpleado.setBounds(235, 30, 62, 14);
 		contentPane_1.add(lblCodigoEnmpleado);
 		
-		textField = new JTextField();
-		textField.setEnabled(false);
-		textField.setColumns(10);
-		textField.setBounds(307, 24, 86, 20);
-		contentPane_1.add(textField);
+		txtCodigo = new JTextField();
+		txtCodigo.setColumns(10);
+		txtCodigo.setBounds(307, 24, 86, 20);
+		contentPane_1.add(txtCodigo);
 		
 		txtNombre = new JTextField();
 		txtNombre.setColumns(10);
@@ -156,6 +155,11 @@ public class FrmEspecialidad extends JFrame {
 		contentPane_1.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				procesar(2);
+			}
+		});
 		btnEditar.setIcon(new ImageIcon(FrmEspecialidad.class.getResource("/cjava/imagenes/041-pencil.png")));
 		btnEditar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEditar.setBounds(157, 149, 111, 48);

@@ -19,4 +19,9 @@ public class UnidadMedidaBLL {
 	    }
 
 	  
+	    public int UnidadMedidActualizar(UnidadMedidaTO x) throws Exception {
+			return dao.update(x);
+		}
+	    
+	    
 }

@@ -51,7 +51,7 @@ public class ConexionDB {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://db4free.net:3306/bdmgsalmacen";
+			String url = "jdbc:mysql://db4free.net:3306/bdmgsalmacen?useSSL=false";
 			String usr = "usermgsolutions";
 			String psw = "Rampwd@123";
 			

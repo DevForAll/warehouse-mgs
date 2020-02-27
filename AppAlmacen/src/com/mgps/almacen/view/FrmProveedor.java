@@ -7,21 +7,36 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
+import com.mgps.almacen.controller.ProveedorBLL;
+import com.mgps.almacen.entity.ProveedorTO;
+import com.mgps.almacen.entity.UnidadMedidaTO;
+
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmProveedor extends JFrame {
 
+	
+	
+	ProveedorBLL obj = new ProveedorBLL();
+	ProveedorTO pr;
+	
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtCodigo;
+	private JTextField txtRazonSocial;
+	private JTextField txtRuc;
+	private JTextField txtTelefono;
+	private JTextField txtDireccion;
 
 	/**
 	 * Launch the application.
@@ -39,12 +54,60 @@ public class FrmProveedor extends JFrame {
 		});
 	}
 
+	
+	
+	private void DatosProveedor() {
+        pr = new ProveedorTO();
+        pr.setRazonSocial(txtRazonSocial.getText());
+        pr.setDireccion(txtDireccion.getText());
+        pr.setRuc(txtRuc.getText());
+        pr.setTelefono(txtTelefono.getText());
+        // pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
+        
+    }
+	
+	  private void procesar(int op) {
+	    	DatosProveedor();// llama a metodo
+	        String msg = "";
+	        int result;
+	        try {
+	            switch (op) {
+	                case 1: // adiciona
+	                    result = obj.ProveedorAdicionar(pr);
+	                    msg = "Proveedor registrado con exito";
+	                    break;
+	                case 2://actualiza
+	                    pr.setIdProveedor((Integer.parseInt(txtCodigo.getText())));
+	                result = obj.ProveedorActualizar(pr);
+	               msg = "Proveedor actualizado con exito";
+	             break;
+	                case 3://elimina
+	               //     pr.setIdempleado(txtIdEmpleado.getText());
+	              //      result = obj.EmpleadoEliminar(pr);
+	              //      msg = "Empleado eliminado con exito";
+	                    break;
+	            }
+	            JOptionPane.showMessageDialog(this, msg);
+	         //   listaEmpleados();
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+
+	    }
+		
+		
+		
+		
+	
+	
+	
+	
 	/**
 	 * Create the frame.
 	 */
 	public FrmProveedor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 508, 396);
+		setBounds(100, 100, 508, 445);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,8 +115,8 @@ public class FrmProveedor extends JFrame {
 		
 		JPanel contentPane_1 = new JPanel();
 		contentPane_1.setLayout(null);
-		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane_1.setBounds(10, 11, 472, 340);
+		contentPane_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		contentPane_1.setBounds(10, 55, 472, 340);
 		contentPane.add(contentPane_1);
 		
 		JLabel lblCodigoEnmpleado = new JLabel("CODIGO");
@@ -61,34 +124,45 @@ public class FrmProveedor extends JFrame {
 		lblCodigoEnmpleado.setBounds(295, 37, 59, 17);
 		contentPane_1.add(lblCodigoEnmpleado);
 		
-		textField = new JTextField();
-		textField.setEnabled(false);
-		textField.setColumns(10);
-		textField.setBounds(354, 36, 86, 20);
-		contentPane_1.add(textField);
+		txtCodigo = new JTextField();
+		txtCodigo.setColumns(10);
+		txtCodigo.setBounds(354, 36, 86, 20);
+		contentPane_1.add(txtCodigo);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(135, 94, 305, 20);
-		contentPane_1.add(textField_1);
+		txtRazonSocial = new JTextField();
+		txtRazonSocial.setColumns(10);
+		txtRazonSocial.setBounds(135, 94, 305, 20);
+		contentPane_1.add(txtRazonSocial);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(131, 66, 121, 20);
-		contentPane_1.add(textField_2);
+		txtRuc = new JTextField();
+		txtRuc.setColumns(10);
+		txtRuc.setBounds(131, 66, 121, 20);
+		contentPane_1.add(txtRuc);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(135, 186, 121, 20);
-		contentPane_1.add(textField_3);
+		txtTelefono = new JTextField();
+		txtTelefono.setColumns(10);
+		txtTelefono.setBounds(135, 186, 121, 20);
+		contentPane_1.add(txtTelefono);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				procesar(1);
+				
+			}
+		});
 		btnGuardar.setIcon(new ImageIcon(FrmProveedor.class.getResource("/cjava/imagenes/035-save.png")));
 		btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnGuardar.setBounds(298, 279, 127, 48);
 		contentPane_1.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				procesar(2);
+			}
+		});
 		btnEditar.setIcon(new ImageIcon(FrmProveedor.class.getResource("/cjava/imagenes/041-pencil.png")));
 		btnEditar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEditar.setBounds(176, 279, 111, 48);
@@ -105,10 +179,10 @@ public class FrmProveedor extends JFrame {
 		lblRazonSocial.setBounds(10, 95, 121, 17);
 		contentPane_1.add(lblRazonSocial);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(135, 123, 305, 51);
-		contentPane_1.add(textField_4);
+		txtDireccion = new JTextField();
+		txtDireccion.setColumns(10);
+		txtDireccion.setBounds(135, 123, 305, 51);
+		contentPane_1.add(txtDireccion);
 		
 		JLabel lblRuc = new JLabel("RUC :");
 		lblRuc.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -126,10 +200,10 @@ public class FrmProveedor extends JFrame {
 		contentPane_1.add(lblDireccion);
 		
 		JLabel lblProveedor = new JLabel("PROVEEDORES");
+		lblProveedor.setBounds(28, 11, 430, 40);
+		contentPane.add(lblProveedor);
 		lblProveedor.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProveedor.setIcon(new ImageIcon(FrmProveedor.class.getResource("/cjava/imagenes/029-add-1.png")));
-		lblProveedor.setBounds(10, 0, 430, 40);
-		contentPane_1.add(lblProveedor);
 		lblProveedor.setFont(new Font("Tahoma", Font.BOLD, 19));
 	}
 

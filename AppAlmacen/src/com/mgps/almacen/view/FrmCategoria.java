@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
 
 public class FrmCategoria extends JFrame {
 
@@ -34,6 +35,8 @@ public class FrmCategoria extends JFrame {
 	private JTextField txtCodigo;
 	private JTextField txtNombre;
 	private JTextField txtDescripcion;
+	private JTable table;
+	private JTextField textField;
 	
 	
 
@@ -61,10 +64,9 @@ public class FrmCategoria extends JFrame {
         pr = new CategoriaTO();
         pr.setNombre(txtNombre.getText());
         pr.setDescripcion(txtDescripcion.getText());
-       // pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
+     // pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
         
     }
-
 
     private void procesar(int op) {
     	DatosCategoria();// llama a metodo
@@ -76,11 +78,11 @@ public class FrmCategoria extends JFrame {
                     result = obj.CategoriaAdicionar(pr);
                     msg = "Categoria registrado con exito";
                     break;
-                case 2://actualiza
-               //     pr.setIdempleado(txtIdEmpleado.getText());
-                //    result = obj.EmpleadoActualizar(pr);
-             //       msg = "Empleado actualizado con exito";
-                //    break;
+                case 2://actualiza  getIdCategoria
+						 pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
+						 result = obj.CategoriaActualizar(pr);
+						 msg = "Categoria actualizado con exito";
+	                break;
                 case 3://elimina
                //     pr.setIdempleado(txtIdEmpleado.getText());
               //      result = obj.EmpleadoEliminar(pr);
@@ -100,7 +102,7 @@ public class FrmCategoria extends JFrame {
 	public FrmCategoria() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmCategoria.class.getResource("/cjava/imagenes/MGSOLUTIONS.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 498, 309);
+		setBounds(100, 100, 873, 445);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -125,7 +127,6 @@ public class FrmCategoria extends JFrame {
 		contentPane_1.add(lblCodigoEnmpleado);
 		
 		txtCodigo = new JTextField();
-		txtCodigo.setEnabled(false);
 		txtCodigo.setColumns(10);
 		txtCodigo.setBounds(307, 24, 86, 20);
 		contentPane_1.add(txtCodigo);
@@ -165,6 +166,13 @@ public class FrmCategoria extends JFrame {
 		contentPane_1.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				procesar(2);
+				
+			}
+		});
 		btnEditar.setIcon(new ImageIcon(FrmCategoria.class.getResource("/cjava/imagenes/041-pencil.png")));
 		btnEditar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEditar.setBounds(157, 149, 111, 48);
@@ -175,6 +183,21 @@ public class FrmCategoria extends JFrame {
 		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEliminar.setBounds(10, 149, 134, 48);
 		contentPane_1.add(btnEliminar);
+		
+		table = new JTable();
+		table.setBackground(Color.GRAY);
+		table.setBounds(469, 101, 362, 288);
+		contentPane.add(table);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(554, 70, 86, 20);
+		contentPane.add(textField);
+		
+		JButton btnGuardar_1 = new JButton("Guardar");
+		btnGuardar_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnGuardar_1.setBounds(680, 48, 140, 48);
+		contentPane.add(btnGuardar_1);
 		
 		
 

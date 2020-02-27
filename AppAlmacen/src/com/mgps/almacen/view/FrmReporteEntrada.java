@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.ImageIcon;
 
 public class FrmReporteEntrada extends JFrame {
 
@@ -88,6 +89,7 @@ public class FrmReporteEntrada extends JFrame {
 		contentPane_1.add(lblDescripcion);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setIcon(new ImageIcon(FrmReporteEntrada.class.getResource("/cjava/imagenes/011-loupe-1.png")));
 		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnBuscar.setBounds(685, 7, 141, 48);
 		contentPane_1.add(btnBuscar);
@@ -106,6 +108,7 @@ public class FrmReporteEntrada extends JFrame {
 		contentPane_1.add(dateChooser_1);
 		
 		JButton btnImprimir = new JButton("Imprimir");
+		btnImprimir.setIcon(new ImageIcon(FrmReporteEntrada.class.getResource("/cjava/imagenes/042-folder.png")));
 		btnImprimir.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnImprimir.setBounds(572, 499, 140, 48);
 		contentPane.add(btnImprimir);

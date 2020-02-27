@@ -17,5 +17,9 @@ public class EspecialidadBLL {
 	        return dao.create(x);
 	    }
 
+	    
+	    public int  EspecialidadActualizar(EspecialidadTO x) throws Exception {
+			return dao.update(x);
+		}
 	
 }

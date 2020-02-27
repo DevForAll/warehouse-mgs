@@ -20,15 +20,15 @@ import javax.swing.border.LineBorder;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-public class FormNewEntrada extends JFrame {
+public class FrmNewEntrada extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JTextField txtFechaHora;
 	private JTextField textField;
-	private JTable table;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -37,7 +37,7 @@ public class FormNewEntrada extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FormNewEntrada frame = new FormNewEntrada();
+					FrmNewEntrada frame = new FrmNewEntrada();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +49,7 @@ public class FormNewEntrada extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FormNewEntrada() {
+	public FrmNewEntrada() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 819, 555);
 		contentPane = new JPanel();
@@ -96,25 +96,9 @@ public class FormNewEntrada extends JFrame {
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setIcon(new ImageIcon(FormNewEntrada.class.getResource("/cjava/imagenes/029-add-1.png")));
+		btnNewButton.setIcon(new ImageIcon(FrmNewEntrada.class.getResource("/cjava/imagenes/029-add-1.png")));
 		btnNewButton.setBounds(535, 158, 46, 41);
 		contentPane.add(btnNewButton);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(739, 376, -674, -100);
-		contentPane.add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-			}
-		));
-		scrollPane.setViewportView(table);
-		table.setBorder(new LineBorder(new Color(65, 105, 225), 1, true));
-		table.setForeground(new Color(244, 164, 96));
-		table.setBackground(new Color(127, 255, 0));
 		
 		JLabel lblPrecioTotal = new JLabel("Precio Total :");
 		lblPrecioTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -125,7 +109,7 @@ public class FormNewEntrada extends JFrame {
 		btnNewButton_1.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnNewButton_1.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton_1.setToolTipText("");
-		btnNewButton_1.setIcon(new ImageIcon(FormNewEntrada.class.getResource("/cjava/imagenes/carrito-de-tienda-online.png")));
+		btnNewButton_1.setIcon(new ImageIcon(FrmNewEntrada.class.getResource("/cjava/imagenes/carrito-de-tienda-online.png")));
 		btnNewButton_1.setForeground(new Color(255, 0, 0));
 		btnNewButton_1.setBackground(new Color(230, 230, 250));
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -133,7 +117,7 @@ public class FormNewEntrada extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("");
-		btnNewButton_1_1.setIcon(new ImageIcon(FormNewEntrada.class.getResource("/cjava/imagenes/001-minus.png")));
+		btnNewButton_1_1.setIcon(new ImageIcon(FrmNewEntrada.class.getResource("/cjava/imagenes/001-minus.png")));
 		btnNewButton_1_1.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnNewButton_1_1.setToolTipText("");
 		btnNewButton_1_1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -144,7 +128,7 @@ public class FormNewEntrada extends JFrame {
 		contentPane.add(btnNewButton_1_1);
 		
 		JButton btnNewButton_1_2 = new JButton("Guardar");
-		btnNewButton_1_2.setIcon(new ImageIcon(FormNewEntrada.class.getResource("/cjava/imagenes/035-save.png")));
+		btnNewButton_1_2.setIcon(new ImageIcon(FrmNewEntrada.class.getResource("/cjava/imagenes/035-save.png")));
 		btnNewButton_1_2.setToolTipText("");
 		btnNewButton_1_2.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton_1_2.setForeground(new Color(0, 0, 0));
@@ -176,7 +160,7 @@ public class FormNewEntrada extends JFrame {
 		contentPane.add(textField_2);
 		
 		JButton btnNewButton_1_2_1 = new JButton("Eliminar");
-		btnNewButton_1_2_1.setIcon(new ImageIcon(FormNewEntrada.class.getResource("/cjava/imagenes/026-delete-2.png")));
+		btnNewButton_1_2_1.setIcon(new ImageIcon(FrmNewEntrada.class.getResource("/cjava/imagenes/026-delete-2.png")));
 		btnNewButton_1_2_1.setToolTipText("");
 		btnNewButton_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton_1_2_1.setForeground(Color.BLACK);
@@ -187,9 +171,14 @@ public class FormNewEntrada extends JFrame {
 		
 		JLabel lblNuevaEntradaDe = new JLabel("NUEVA ENTRADA DE PRODUCTOS AL ALMACEN");
 		lblNuevaEntradaDe.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNuevaEntradaDe.setIcon(new ImageIcon(FormNewEntrada.class.getResource("/cjava/imagenes/050-wallet.png")));
+		lblNuevaEntradaDe.setIcon(new ImageIcon(FrmNewEntrada.class.getResource("/cjava/imagenes/050-wallet.png")));
 		lblNuevaEntradaDe.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblNuevaEntradaDe.setBounds(29, 11, 749, 41);
 		contentPane.add(lblNuevaEntradaDe);
+		
+		table = new JTable();
+		table.setBackground(Color.GRAY);
+		table.setBounds(10, 259, 783, 153);
+		contentPane.add(table);
 	}
 }

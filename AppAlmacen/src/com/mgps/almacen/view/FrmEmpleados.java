@@ -6,7 +6,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.mgps.almacen.controller.EmpleadosBLL;
+import com.mgps.almacen.entity.EmpleadoTO;
+import com.mgps.almacen.entity.EspecialidadTO;
+
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
@@ -15,15 +22,24 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmEmpleados extends JFrame {
 
+	
+	
+	EmpleadosBLL obj = new EmpleadosBLL();
+	EmpleadoTO pr;
+	EspecialidadTO es;
+	
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField txtCodigo;
 	private JTextField txtApellido;
 	private JTextField txtDni;
 	private JTextField txtEmail;
 	private JTextField txtNombre;
+	private JTextField txtCodigoEspecialidad;
 
 	/**
 	 * Launch the application.
@@ -41,6 +57,68 @@ public class FrmEmpleados extends JFrame {
 		});
 	}
 
+	private void DatosEmpleados() {
+        pr = new EmpleadoTO();
+        EspecialidadTO esp = new EspecialidadTO();
+        pr.setNombre(txtNombre.getText());
+        pr.setApellido(txtApellido.getText());
+        pr.setNombre(txtNombre.getText());
+        pr.setDni(txtDni.getText());
+        pr.setEmail(txtEmail.getText());
+    //    pr.setEspecialidad(esp.getIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
+        
+      //  pr.getEspecialidad(esp.setIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
+        
+        
+      //  pr.setEspecialidad(esp.getIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
+        
+        
+        
+       // pr.setEspecialidad(especialidad);(es.setIdEspecialidad((Integer.parseInt(txtCodigoEspecialidad.getText()))));
+        //  pr.setEspecialidad(es.setIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
+//        pr.setEspecialidad().setIdEspecialidad((Integer.parseInt(txtCodigoEspecialidad.getText())));
+       // pr.setEspecialidad(es.setIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
+        
+    //  es.setIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText()));
+        
+//     pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
+        
+    }
+
+    private void procesar(int op) {
+    	DatosEmpleados();// llama a metodo
+        String msg = "";
+        int result;
+        try {
+            switch (op) {
+                case 1: // adiciona
+                    result = obj.EmpleadosAdicionar(pr);
+                    msg = "Empleados registrado con exito";
+                    break;
+                case 2://actualiza  getIdCategoria
+						 pr.setIdEmpleado(Integer.parseInt(txtCodigo.getText()));
+						 result = obj.EmpleadosActualizar(pr);
+						 msg = "Empleados actualizado con exito";
+	                break;
+                case 3://elimina
+               //     pr.setIdempleado(txtIdEmpleado.getText());
+              //      result = obj.EmpleadoEliminar(pr);
+              //      msg = "Empleado eliminado con exito";
+                    break;
+            }
+            JOptionPane.showMessageDialog(this, msg);
+         //   listaEmpleados();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+
+    }
+	
+	
+	
+	
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -63,11 +141,10 @@ public class FrmEmpleados extends JFrame {
 		lblCodigoEmpleado.setBounds(201, 25, 46, 14);
 		contentPane_1.add(lblCodigoEmpleado);
 		
-		textField = new JTextField();
-		textField.setEnabled(false);
-		textField.setColumns(10);
-		textField.setBounds(254, 22, 86, 20);
-		contentPane_1.add(textField);
+		txtCodigo = new JTextField();
+		txtCodigo.setColumns(10);
+		txtCodigo.setBounds(254, 22, 86, 20);
+		contentPane_1.add(txtCodigo);
 		
 		txtApellido = new JTextField();
 		txtApellido.setColumns(10);
@@ -86,7 +163,7 @@ public class FrmEmpleados extends JFrame {
 		
 		JLabel lblApellido = new JLabel("APELLIDOS :");
 		lblApellido.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblApellido.setBounds(0, 53, 86, 14);
+		lblApellido.setBounds(11, 50, 86, 14);
 		contentPane_1.add(lblApellido);
 		
 		txtNombre = new JTextField();
@@ -96,22 +173,22 @@ public class FrmEmpleados extends JFrame {
 		
 		JLabel lblEspecialidad = new JLabel("ESPECIALIDAD :");
 		lblEspecialidad.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblEspecialidad.setBounds(0, 180, 110, 14);
+		lblEspecialidad.setBounds(11, 177, 110, 14);
 		contentPane_1.add(lblEspecialidad);
 		
 		JLabel lblNombre = new JLabel("NOMBRE :");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNombre.setBounds(0, 84, 86, 14);
+		lblNombre.setBounds(11, 81, 86, 14);
 		contentPane_1.add(lblNombre);
 		
 		JLabel lblDni = new JLabel("DNI :");
 		lblDni.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDni.setBounds(0, 115, 86, 14);
+		lblDni.setBounds(11, 112, 86, 14);
 		contentPane_1.add(lblDni);
 		
 		JLabel lblEmail = new JLabel("EMAIL :");
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblEmail.setBounds(-1, 146, 86, 14);
+		lblEmail.setBounds(10, 143, 86, 14);
 		contentPane_1.add(lblEmail);
 		
 		JComboBox cmbEspecialidad = new JComboBox();
@@ -119,12 +196,27 @@ public class FrmEmpleados extends JFrame {
 		contentPane_1.add(cmbEspecialidad);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				procesar(1);
+			}
+			
+			
+		});
 		btnGuardar.setIcon(new ImageIcon(FrmEmpleados.class.getResource("/cjava/imagenes/035-save.png")));
 		btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnGuardar.setBounds(276, 236, 127, 48);
 		contentPane_1.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				procesar(2);
+			}
+		});
 		btnEditar.setIcon(new ImageIcon(FrmEmpleados.class.getResource("/cjava/imagenes/041-pencil.png")));
 		btnEditar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEditar.setBounds(154, 236, 111, 48);
@@ -136,6 +228,15 @@ public class FrmEmpleados extends JFrame {
 		btnEliminar.setBounds(10, 236, 134, 48);
 		contentPane_1.add(btnEliminar);
 		
+		JLabel lblCodEspecialidad = new JLabel("1");
+		lblCodEspecialidad.setBounds(379, 160, 46, 20);
+		contentPane_1.add(lblCodEspecialidad);
+		
+		txtCodigoEspecialidad = new JTextField();
+		txtCodigoEspecialidad.setColumns(10);
+		txtCodigoEspecialidad.setBounds(361, 175, 32, 20);
+		contentPane_1.add(txtCodigoEspecialidad);
+		
 		JLabel lblEmpleados = new JLabel("EMPLEADOS");
 		lblEmpleados.setIcon(new ImageIcon(FrmEmpleados.class.getResource("/cjava/imagenes/003-add-user.png")));
 		lblEmpleados.setHorizontalAlignment(SwingConstants.CENTER);
@@ -143,5 +244,4 @@ public class FrmEmpleados extends JFrame {
 		lblEmpleados.setBounds(30, 11, 430, 40);
 		contentPane.add(lblEmpleados);
 	}
-
 }

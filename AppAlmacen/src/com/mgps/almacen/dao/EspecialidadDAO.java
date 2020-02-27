@@ -1,5 +1,6 @@
 package com.mgps.almacen.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,11 +9,15 @@ import java.sql.Statement;
 import java.util.List;
 
 import com.mgps.almacen.database.ConexionDB;
+import com.mgps.almacen.entity.CategoriaTO;
 import com.mgps.almacen.entity.EspecialidadTO;
 import com.mgps.almacen.service.ICrudDao;
 
 public class EspecialidadDAO implements ICrudDao<EspecialidadTO> {
 
+	
+
+	  CallableStatement cs = null;
 	  Connection cn = null;
 	  Statement stm = null;
 	  PreparedStatement ps = null;
@@ -40,6 +45,8 @@ public class EspecialidadDAO implements ICrudDao<EspecialidadTO> {
 	  
 	  
 	  final String SQL_ADICIONAR = "{call SP_ESPECIALIDAD_INSERTAR(?,?,?)}";
+
+	  final String SQL_ACTUALIZAR = "{call SP_ESPECIALIDAD_ACTUALIZAR(?,?,?)}";
 	  
 	  @Override
 	  public int create(EspecialidadTO t) throws Exception {
@@ -74,11 +81,34 @@ public class EspecialidadDAO implements ICrudDao<EspecialidadTO> {
 		    return ok;
 		  
 	  }
-
-	  @Override
-	  public int update(EspecialidadTO t) throws Exception {
-	    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	  }
+	  	  
+	   @Override
+	 public int update(EspecialidadTO t) throws Exception {
+		  	 int ok;
+	    try {
+			cn = ConexionDB.getConexion2020();
+			cn.setAutoCommit(false);
+			cs = cn.prepareCall(SQL_ACTUALIZAR);
+			cs.setInt(1, t.getIdEspecialidad());
+			cs.setString(2, t.getNombre());
+			cs.setString(3, t.getDescripcion());
+		
+			ok = cs.executeUpdate() == 1 ? 1 : 0;
+			cs.close();
+			cn.commit();	//CONFIRMA QUE SE ACTUALIZO CON EXITO
+		} catch (SQLException e) {
+			try {
+				cn.rollback();
+			} catch (Exception e1) {
+			}
+			throw e;
+		} finally {
+			//cn.close();
+		}
+	    return ok;
+	 }
+	   
+	  
 
 	  @Override
 	  public int delete(EspecialidadTO t) throws Exception {
