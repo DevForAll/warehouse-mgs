@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mgps.almacen.database.ConexionDB;
@@ -115,23 +116,66 @@ public class EspecialidadDAO implements ICrudDao<EspecialidadTO> {
 	    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	  }
 
-	@Override
-	public EspecialidadTO find(Object t) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public List<EspecialidadTO> readAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+					
+		   lista = new ArrayList<>();
+		   try {
+		     cn = ConexionDB.getConexion2020();
+		     sql = "SELECT * FROM TB_ESPECIALIDAD";
+		     stm = cn.createStatement();
+		     //ejecutar comando
+		     rs = stm.executeQuery(sql);
+		     while (rs.next()) {
+		       cat = new EspecialidadTO();
+		       cat.setIdEspecialidad(rs.getInt(1));
+		       cat.setNombre(rs.getString(2));
+		       cat.setDescripcion(rs.getString(3));
+		       lista.add(cat);
+		     }
+		     rs.close();
+		     stm.close();
+		   } catch (Exception e) {
+		     throw e;
+		   } finally {
+		   }
+		       return lista;
 	}
+
+	
+
+	 @Override
+	 public EspecialidadTO find(Object t) throws Exception {
+		 cat = null;
+		 try {
+			cn = ConexionDB.getConexion2020();
+			ps = cn.prepareStatement("select * from TB_CATEGORIAS where CATE_IDCATEGORIA=?");
+			ps.setString(1, (String) t);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				cat = new EspecialidadTO();
+				cat.setIdEspecialidad(Integer.parseInt(rs.getString(1)));
+				cat.setNombre(rs.getString(2));
+				cat.setDescripcion(rs.getString(3));
+			}
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+		}
+		 return cat;
+	 }
 
 	@Override
 	public List<EspecialidadTO> readAll(Object t, int op) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	
 	
 }

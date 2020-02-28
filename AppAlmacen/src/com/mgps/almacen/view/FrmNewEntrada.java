@@ -90,7 +90,7 @@ public class FrmNewEntrada extends JFrame {
 		textField.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(157, 169, 368, 23);
+		comboBox.setBounds(157, 160, 368, 32);
 		contentPane.add(comboBox);
 		
 		JButton btnNewButton = new JButton("");

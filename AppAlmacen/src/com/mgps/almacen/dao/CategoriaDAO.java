@@ -2,13 +2,18 @@ package com.mgps.almacen.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
 import com.mgps.almacen.entity.CategoriaTO;
 import com.mgps.almacen.service.ICrudDao;
 
@@ -118,6 +123,7 @@ public class CategoriaDAO implements ICrudDao<CategoriaTO>  {
        cat = new CategoriaTO();
        cat.setIdCategoria(rs.getInt(1));
        cat.setNombre(rs.getString(2));
+       cat.setDescripcion(rs.getString(3));
        lista.add(cat);
      }
      rs.close();
@@ -126,8 +132,7 @@ public class CategoriaDAO implements ICrudDao<CategoriaTO>  {
      throw e;
    } finally {
    }
-   return lista;
-
+       return lista;
  }
 
  @Override

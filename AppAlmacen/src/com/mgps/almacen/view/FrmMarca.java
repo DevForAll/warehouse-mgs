@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import com.mgps.almacen.controller.MarcaBLL;
+import com.mgps.almacen.entity.EspecialidadTO;
 import com.mgps.almacen.entity.MarcaTO;
 
 import java.awt.Color;
@@ -21,7 +22,12 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
 
 public class FrmMarca extends JFrame {
 
@@ -37,6 +43,8 @@ public class FrmMarca extends JFrame {
 	private JTextField txtCodigo;
 	private JTextField txtNombre;
 	private JTextField txtDescripcion;
+	private JTextField textField;
+	private JTable tblMarca;
 
 	/**
 	 * Launch the application.
@@ -100,7 +108,7 @@ public class FrmMarca extends JFrame {
 	 */
 	public FrmMarca() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 514, 322);
+		setBounds(100, 100, 985, 859);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -109,7 +117,7 @@ public class FrmMarca extends JFrame {
 		JPanel contentPane_1 = new JPanel();
 		contentPane_1.setLayout(null);
 		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane_1.setBounds(10, 11, 482, 270);
+		contentPane_1.setBounds(10, 11, 921, 270);
 		contentPane.add(contentPane_1);
 		
 		JLabel lblMarca = new JLabel("MARCA");
@@ -122,7 +130,7 @@ public class FrmMarca extends JFrame {
 		JPanel contentPane_1_1 = new JPanel();
 		contentPane_1_1.setLayout(null);
 		contentPane_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		contentPane_1_1.setBounds(35, 48, 424, 205);
+		contentPane_1_1.setBounds(35, 48, 876, 205);
 		contentPane_1.add(contentPane_1_1);
 		
 		JLabel lblCodigoEnmpleado = new JLabel("CODIGO");
@@ -164,7 +172,7 @@ public class FrmMarca extends JFrame {
 		});
 		btnGuardar.setIcon(new ImageIcon(FrmMarca.class.getResource("/cjava/imagenes/035-save.png")));
 		btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnGuardar.setBounds(274, 149, 140, 48);
+		btnGuardar.setBounds(726, 12, 140, 45);
 		contentPane_1_1.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
@@ -176,14 +184,95 @@ public class FrmMarca extends JFrame {
 		});
 		btnEditar.setIcon(new ImageIcon(FrmMarca.class.getResource("/cjava/imagenes/041-pencil.png")));
 		btnEditar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnEditar.setBounds(157, 149, 111, 48);
+		btnEditar.setBounds(726, 71, 140, 45);
 		contentPane_1_1.add(btnEditar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setIcon(new ImageIcon(FrmMarca.class.getResource("/cjava/imagenes/042-multiply-1.png")));
 		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnEliminar.setBounds(10, 149, 134, 48);
+		btnEliminar.setBounds(726, 127, 140, 45);
 		contentPane_1_1.add(btnEliminar);
+		
+		JPanel contentPane_1_1_1 = new JPanel();
+		contentPane_1_1_1.setLayout(null);
+		contentPane_1_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		contentPane_1_1_1.setBounds(10, 290, 907, 512);
+		contentPane.add(contentPane_1_1_1);
+		
+		JLabel lblNombre_1 = new JLabel("NOMBRE :");
+		lblNombre_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNombre_1.setBounds(27, 26, 86, 14);
+		contentPane_1_1_1.add(lblNombre_1);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnBuscar.setBounds(416, 11, 124, 43);
+		contentPane_1_1_1.add(btnBuscar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		scrollPane.setBounds(21, 66, 863, 388);
+		contentPane_1_1_1.add(scrollPane);
+		
+		tblMarca = new JTable();
+		scrollPane.setViewportView(tblMarca);
+		tblMarca.setFont(new Font("Tahoma", Font.BOLD, 12));
+		
+		
+		//listaCategorias();
+		tblMarca.setModel(new DefaultTableModel(
+			new Object[][] {
+				
+			//	listaCategorias();
+				
+				
+			},
+			new String[] {
+				"ID", "NOMBRE", "DESCRIPCION"
+			}
+		));
+		tblMarca.getColumnModel().getColumn(0).setPreferredWidth(50);
+		tblMarca.getColumnModel().getColumn(1).setPreferredWidth(171);
+		tblMarca.getColumnModel().getColumn(2).setPreferredWidth(362);
+		scrollPane.setViewportView(tblMarca);
+		
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(96, 20, 315, 28);
+		contentPane_1_1_1.add(textField);
+		
+		JButton btnImprimir = new JButton("Imprimir");
+		btnImprimir.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnImprimir.setBounds(736, 458, 148, 43);
+		contentPane_1_1_1.add(btnImprimir);
+		
+		
+		listaMarca();
 	}
+	
+	
+	  public void listaMarca() {
+	    	try {
+				List<MarcaTO> lista = obj.MarcaListar();
+				verMarca(lista);
+				
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this, e.getMessage());
+			}
+	    }
+	    
+	    private void verMarca(List<MarcaTO> lista) {
+	        // variable de tipo tabla
+	        DefaultTableModel model =  (DefaultTableModel) tblMarca.getModel();
+	        model.setRowCount(0);
+	        for (MarcaTO x : lista) {
+	            Object[] dato = {
+	            	x.getIdMarca(),
+	                x.getNombre(),
+	                x.getDescripcion()};
+	            	model.addRow(dato);
+	        }
+	    }
 
 }

@@ -53,7 +53,7 @@ public class FrmReporteEntrada extends JFrame {
 		
 		table = new JTable();
 		table.setBackground(Color.GRAY);
-		table.setBounds(20, 143, 836, 345);
+		table.setBounds(20, 170, 836, 318);
 		contentPane.add(table);
 		
 		JPanel contentPane_1 = new JPanel();

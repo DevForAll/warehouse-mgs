@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mgps.almacen.entity.CategoriaTO;
+import com.mgps.almacen.entity.MarcaTO;
 import com.mgps.almacen.entity.UnidadMedidaTO;
 import com.mgps.almacen.database.ConexionDB;
 import com.mgps.almacen.service.ICrudDao;
@@ -112,18 +113,77 @@ public class UnidadMedidaDAO implements ICrudDao<UnidadMedidaTO> {
 		}
 	    return ok;
 	 }
-	   
-	  
+	    
+	  	   
+	  	   
+	  	   
+
+
+	 	  
+
+			@Override
+			public List<UnidadMedidaTO> readAll() throws Exception {
+				
+							
+				   lista = new ArrayList<>();
+				   try { 
+				     cn = ConexionDB.getConexion2020();
+				     sql = "SELECT * FROM TB_UNIDAD_MEDIDA";
+				     stm = cn.createStatement();
+				     //ejecutar comando
+				     rs = stm.executeQuery(sql);
+				     while (rs.next()) {
+				       cat = new UnidadMedidaTO();
+				       cat.setCod(rs.getInt(1));
+				       cat.setDescripcion(rs.getString(2));
+				       cat.setDescripcionCorta(rs.getString(3));
+				       cat.setCodigoSunat(rs.getString(4));
+				       lista.add(cat);
+				     }
+				     rs.close();
+				     stm.close();
+				   } catch (Exception e) {
+				     throw e;
+				   } finally {
+				   }
+				       return lista;
+			}
+
+			
+
+			 @Override
+			 public UnidadMedidaTO find(Object t) throws Exception {
+				 cat = null;
+				 try {
+					cn = ConexionDB.getConexion2020();
+					ps = cn.prepareStatement("select * from TB_CATEGORIAS where CATE_IDCATEGORIA=?");
+					ps.setString(1, (String) t);
+					rs = ps.executeQuery();
+					if (rs.next()) {
+						cat = new UnidadMedidaTO();
+						cat.setCod(Integer.parseInt(rs.getString(1)));
+						cat.setDescripcion(rs.getString(2));
+						cat.setDescripcionCorta(rs.getString(3));
+					}
+					rs.close();
+					ps.close();
+				} catch (SQLException e) {
+					throw e;
+				} finally {
+				}
+				 return cat;
+			 }
+	  	   
+	  	   
+	  	   
+	  	   
 
 	  @Override
 	  public int delete(UnidadMedidaTO t) throws Exception {
 	    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	  }
 
-	  @Override
-	  public UnidadMedidaTO find(Object t) throws SQLException {
-	    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	  }
+	 
 
 	
 	@Override
@@ -132,11 +192,6 @@ public class UnidadMedidaDAO implements ICrudDao<UnidadMedidaTO> {
 		return null;
 	}
 
-	@Override
-	public List<UnidadMedidaTO> readAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 }

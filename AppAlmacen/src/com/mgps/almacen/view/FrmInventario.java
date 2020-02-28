@@ -11,10 +11,18 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.JScrollPane;
+import javax.swing.border.MatteBorder;
+import javax.swing.JTextField;
+import javax.swing.JTable;
 
 public class FrmInventario extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField textField;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -37,7 +45,7 @@ public class FrmInventario extends JFrame {
 	 */
 	public FrmInventario() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 785, 503);
+		setBounds(100, 100, 991, 678);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -66,6 +74,40 @@ public class FrmInventario extends JFrame {
 		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEliminar.setBounds(340, 62, 134, 48);
 		contentPane.add(btnEliminar);
+		
+		JPanel contentPane_1_1 = new JPanel();
+		contentPane_1_1.setLayout(null);
+		contentPane_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		contentPane_1_1.setBounds(10, 121, 894, 512);
+		contentPane.add(contentPane_1_1);
+		
+		JLabel lblNombre_1 = new JLabel("NOMBRE :");
+		lblNombre_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNombre_1.setBounds(27, 26, 86, 14);
+		contentPane_1_1.add(lblNombre_1);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnBuscar.setBounds(416, 11, 124, 43);
+		contentPane_1_1.add(btnBuscar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		scrollPane.setBounds(21, 66, 863, 388);
+		contentPane_1_1.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setFont(new Font("Tahoma", Font.BOLD, 12));
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(96, 20, 315, 28);
+		contentPane_1_1.add(textField);
+		
+		JButton btnImprimir = new JButton("Imprimir");
+		btnImprimir.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnImprimir.setBounds(736, 458, 148, 43);
+		contentPane_1_1.add(btnImprimir);
 	}
-
 }

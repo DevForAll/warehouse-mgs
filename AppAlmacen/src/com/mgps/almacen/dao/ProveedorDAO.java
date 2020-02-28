@@ -6,9 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mgps.almacen.database.ConexionDB;
+import com.mgps.almacen.entity.MarcaTO;
 import com.mgps.almacen.entity.ProveedorTO;
  import com.mgps.almacen.service.ICrudDao;
 
@@ -121,18 +123,69 @@ public class ProveedorDAO implements ICrudDao<ProveedorTO>{
 			return 0;
 		}
 
-		@Override
-		public ProveedorTO find(Object t) throws Exception {
-			// TODO Auto-generated method stub
-			return null;
-		}
+
 
 		@Override
 		public List<ProveedorTO> readAll() throws Exception {
-			// TODO Auto-generated method stub
-			return null;
+			
+						
+			   lista = new ArrayList<>();
+			   try { 
+			     cn = ConexionDB.getConexion2020();
+			     sql = "SELECT * FROM TB_PROVEEDORES";
+			     stm = cn.createStatement();
+			     //ejecutar comando
+			     rs = stm.executeQuery(sql);
+			     while (rs.next()) {
+			       cat = new ProveedorTO();
+			       cat.setIdProveedor(rs.getInt(1));
+			       cat.setRazonSocial(rs.getString(2));
+			       cat.setDireccion(rs.getString(3));
+			       cat.setRuc(rs.getString(4));
+			       cat.setTelefono(rs.getString(5));
+			       lista.add(cat);
+			     }
+			     rs.close();
+			     stm.close();
+			   } catch (Exception e) {
+			     throw e;
+			   } finally {
+			   }
+			       return lista;
 		}
 
+		
+
+		 @Override
+		 public ProveedorTO find(Object t) throws Exception {
+			 cat = null;
+			 try {
+				cn = ConexionDB.getConexion2020();
+				ps = cn.prepareStatement("select * from TB_CATEGORIAS where CATE_IDCATEGORIA=?");
+				ps.setString(1, (String) t);
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					cat = new ProveedorTO();
+					cat.setIdProveedor(Integer.parseInt(rs.getString(1)));
+					cat.setRazonSocial(rs.getString(2));
+					cat.setRuc(rs.getString(3));
+				}
+				rs.close();
+				ps.close();
+			} catch (SQLException e) {
+				throw e;
+			} finally {
+			}
+			 return cat;
+		 }
+	  
+		
+		
+		
+		
+		
+		
+		
 		@Override
 		public List<ProveedorTO> readAll(Object t, int op) throws Exception {
 			// TODO Auto-generated method stub
