@@ -29,6 +29,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrmUnidadMedida extends JFrame {
 
@@ -74,7 +76,7 @@ public class FrmUnidadMedida extends JFrame {
 	 */
 	public FrmUnidadMedida() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 989, 873);
+		setBounds(100, 100, 975, 799);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -173,7 +175,7 @@ public class FrmUnidadMedida extends JFrame {
 		JPanel contentPane_1_1_1 = new JPanel();
 		contentPane_1_1_1.setLayout(null);
 		contentPane_1_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		contentPane_1_1_1.setBounds(39, 302, 907, 512);
+		contentPane_1_1_1.setBounds(39, 302, 907, 452);
 		contentPane.add(contentPane_1_1_1);
 		
 		JLabel lblNombre_1 = new JLabel("NOMBRE :");
@@ -189,10 +191,17 @@ public class FrmUnidadMedida extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		scrollPane.setBounds(21, 66, 863, 388);
+		scrollPane.setBounds(21, 66, 863, 325);
 		contentPane_1_1_1.add(scrollPane);
 		
 		tblUnidadMedida = new JTable();
+		tblUnidadMedida.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				mostrar();
+			}
+		});
 		scrollPane.setViewportView(tblUnidadMedida);
 		//listaCategorias();
 		tblUnidadMedida.setModel(new DefaultTableModel(
@@ -222,7 +231,7 @@ public class FrmUnidadMedida extends JFrame {
 		JButton btnImprimir = new JButton("Imprimir");
 		btnImprimir.setIcon(new ImageIcon(FrmUnidadMedida.class.getResource("/cjava/imagenes/042-folder.png")));
 		btnImprimir.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnImprimir.setBounds(736, 458, 148, 43);
+		btnImprimir.setBounds(722, 397, 148, 43);
 		contentPane_1_1_1.add(btnImprimir);
 		
 		
@@ -256,6 +265,25 @@ public class FrmUnidadMedida extends JFrame {
 	        }
 	    }
 	
+	private void mostrar() {
+	        try {
+	      	  pr = obj.UnidadMedidaBuscar(tblUnidadMedida.getModel().getValueAt(tblUnidadMedida.getSelectedRow(), 0).toString())        		;
+	              if (pr != null) {
+	            	txtCodigo.setText(pr.getCod() +"");
+	            	txtNombre.setText(pr.getDescripcion());
+	            	txtNombreCorto.setText(pr.getDescripcionCorta());
+	            	txtCodSunat.setText(pr.getCodigoSunat());
+	            
+	            } else {
+	                JOptionPane.showMessageDialog(this, "Marca no existe...");
+	            }
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+	    }
+	    
+	    
+	    
 	    
 	    private void DatosUnidadMedida() {
 	        pr = new UnidadMedidaTO();

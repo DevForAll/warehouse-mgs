@@ -42,7 +42,8 @@ public class FrmCategoria extends JFrame {
 	private JTextField txtNombre;
 	private JTextField txtDescripcion;
 	private JTable tblCategoria;
-	private JTextField textField;
+	private JTextField txtBuscarNombre;
+	private JTextField txtFila;
 	/**
 	 * Launch the application.
 	 */
@@ -163,6 +164,23 @@ public class FrmCategoria extends JFrame {
 		contentPane_1_1.add(lblNombre_1);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			//mostrarNombre();
+			//listaCategoriasNombre();
+				
+			}
+		});
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				
+			}
+		});
 		btnBuscar.setIcon(new ImageIcon(FrmCategoria.class.getResource("/cjava/imagenes/011-loupe-1.png")));
 		btnBuscar.setBounds(416, 11, 124, 43);
 		contentPane_1_1.add(btnBuscar);
@@ -170,6 +188,18 @@ public class FrmCategoria extends JFrame {
 			btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 14));
 			
 			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					
+//					 DefaultTableModel modelo = (DefaultTableModel)tblCategoria.getModel();
+//					
+//					 int fila = tblCategoria.getSelectedRow();
+//					txtBuscarNombre.setText(modelo.getValueAt(fila, 0).toString());
+					 
+					 mostrarNombre();  
+				}
+			});
 			scrollPane.setBounds(21, 66, 863, 388);
 			contentPane_1_1.add(scrollPane);
 			scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
@@ -177,6 +207,23 @@ public class FrmCategoria extends JFrame {
 			
 			
 			tblCategoria = new JTable();
+			tblCategoria.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+					
+				//	 DefaultTableModel modelo = (DefaultTableModel)tblCategoria.getModel();
+						
+				//	   int fila = tblCategoria.getSelectedRow();
+				 //       txtFila.setText(modelo.getValueAt(fila, 0).toString());
+					
+				        
+				        mostrar();
+					
+					
+					
+				}
+			});
 			tblCategoria.setFont(new Font("Tahoma", Font.BOLD, 12));
 			//listaCategorias();
 			tblCategoria.setModel(new DefaultTableModel(
@@ -195,17 +242,21 @@ public class FrmCategoria extends JFrame {
 			tblCategoria.getColumnModel().getColumn(2).setPreferredWidth(362);
 			scrollPane.setViewportView(tblCategoria);
 			
-			textField = new JTextField();
-			textField.setColumns(10);
-			textField.setBounds(96, 20, 315, 28);
-			contentPane_1_1.add(textField);
+			txtBuscarNombre = new JTextField();
+			txtBuscarNombre.setColumns(10);
+			txtBuscarNombre.setBounds(96, 20, 315, 28);
+			contentPane_1_1.add(txtBuscarNombre);
 			
 			JButton btnImprimir = new JButton("Imprimir");
 			btnImprimir.setIcon(new ImageIcon(FrmCategoria.class.getResource("/cjava/imagenes/042-folder.png")));
 			btnImprimir.setFont(new Font("Tahoma", Font.BOLD, 14));
 			btnImprimir.setBounds(736, 458, 148, 43);
 			contentPane_1_1.add(btnImprimir);
-		
+			
+			txtFila = new JTextField();
+			txtFila.setBounds(27, 465, 108, 20);
+			contentPane_1_1.add(txtFila);
+			txtFila.setVisible(false);
 		
 		listaCategorias();
 
@@ -237,26 +288,152 @@ public class FrmCategoria extends JFrame {
 
 	    
 
-//	    private void mostrar() {
-//	        try {
-//	            pr = obj.CategoriaListar(txtIdEmpleado.getText());
-//	            if (pr != null) {
-//	                txtNombre.setText(pr.getNombre());
-//	                txtApellido.setText(pr.getApellido());
-//	                txtEmail.setText(pr.getEmail());
-//	                txtUsuario.setText(pr.getUsuario());
-//	                txtPassword.setText(pr.getClave());
-//	            } else {
-//	                JOptionPane.showMessageDialog(this, "Empleado no existe...");
-//	            }
-//	        } catch (Exception e) {
-//	            JOptionPane.showMessageDialog(this, e.getMessage());
-//	        }
+	    private void mostrar() {
+	        try {
+	         
+	        //	 DefaultTableModel modelo = (DefaultTableModel)tblCategoria.getModel();
+			
+			//	   int fila = tblCategoria.getSelectedRow();
+			  //      txtFila.setText(modelo.getValueAt(fila, 0).toString());
+	        	
+	        	pr = obj.CategoriaBuscar(tblCategoria.getModel().getValueAt(tblCategoria.getSelectedRow(), 0).toString())        		;
+	           // pr = obj.CategoriaBuscar(txtFila.getText());
+	         //   (modelo.getValueAt(fila, 0).toString());
+	            if (pr != null) {
+	            	txtCodigo.setText(pr.getIdCategoria() +"");
+	            	txtNombre.setText(pr.getNombre());
+	                txtDescripcion.setText(pr.getDescripcion());
+	                
+	               // txtcantidad.setText(pr.getStock() + "");
+	            
+	            } else {
+	                JOptionPane.showMessageDialog(this, "Categoria no existe...");
+	            }
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+	    }
 
+	    private void mostrarNombre() {
+	     
+	    	  try {
+	    		  
+	    		
+		          	
+	    		  pr =obj.CategoriaBuscarXNombre(txtBuscarNombre.getText());
 	    
+//	        	pr = obj.CategoriaBuscarXNombre(txtBuscarNombre.getText());
+             if (pr != null) {
+            	 
+            	 
+//            		txtCodigo.setText(pr.getIdCategoria() +"");
+//	            	txtNombre.setText(pr.getNombre());
+//	                txtDescripcion.setText(pr.getDescripcion());
+//	                
+//	                
+            	 
+            	// List<CategoriaTO> lista = obj.CategoriaBuscarXNombre(txtBuscarNombre.getText());
+            	 List<CategoriaTO> listaA = obj.CategoriaListarXNombre();
+      			
+            	// verCategorias(lista);
+            	 
+            	 
+            	 
+            	 DefaultTableModel model =  (DefaultTableModel) tblCategoria.getModel();
+     	        model.setRowCount(0);
+     	        
+//     	       model.addColumn(pr.getIdCategoria());
+//     	       model.addColumn(pr.getNombre());
+//     	      model.addColumn(pr.getDescripcion());
+//     	      
+     	        
+     	        for (CategoriaTO x : listaA) {
+     	            Object[] datoA = {
+     	            	x.getIdCategoria(),
+     	            	x.getNombre(),
+     	            	x.getDescripcion()};	
+     	                 	        	            
+     	            	model.addRow(datoA);
+     	                 	           	
+     	        }
+//     	        model.addColumn(pr.getIdCategoria());
+//     	       model.addColumn(pr.getNombre());
+//     	      model.addColumn(pr.getDescripcion());
+     	        
+             }else {
+	                JOptionPane.showMessageDialog(this, "Categoria no existe...");
+	            }
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+	    }
+//	    
+//	    
+//  public void listaCategoriasNombre() {
+//	  
+//	  
+//	  try {
+//			List<CategoriaTO> listaNombre = obj.CategoriaListarXNombre();
+//			verCategoriasa(listaNombre);
+//			
+//		} catch (Exception e) {
+//			JOptionPane.showMessageDialog(this, e.getMessage());
+//		}   
+//	    }
+//	    
+//  
+//  private void verCategoriasa(List<CategoriaTO> lista) {
+//      // variable de tipo tabla
+//      DefaultTableModel model =  (DefaultTableModel) tblCategoria.getModel();
+//      model.setRowCount(0);
+//      for (CategoriaTO x : lista) {
+//          Object[] dato = {
+//          	x.getIdCategoria(),
+//              x.getNombre(),
+//              x.getDescripcion()};
+//          	model.addRow(dato);
+//      }
+//  }
+//	
+//	
+//		        
+//
+//	    private void mostrarNombre() {
+//	  
+//	        	
+//	        //	    	
+//	        	
+//	    	try {
+//	    		
+//	    		tblCategoria. obj.CategoriaBuscarXNombre(txtBuscarNombre.getText());
+//		         
+//	    		
+//		       
+//	    		 if (pr != null) {
+//	    			 tblCategoria
+//	    			 
+//		            	txtCodigo.setText(pr.getIdCategoria() +"");
+//		            	txtNombre.setText(pr.getNombre());
+//		                txtDescripcion.setText(pr.getDescripcion());
+//		                
+//		               // txtcantidad.setText(pr.getStock() + "");
+//		            
+//		            } else {
+//		                JOptionPane.showMessageDialog(this, "Categoria no existe...");
+//		            }
+//	    		
+//	    		
+//		        } catch (Exception e) {
+//		            JOptionPane.showMessageDialog(this, e.getMessage());
+//		        }
+//		    }
+//	    
 	    
-	    
-	    
+	
+	        	
+	       
+	   
+
 	    
 	    
 	private void DatosCategoria() {

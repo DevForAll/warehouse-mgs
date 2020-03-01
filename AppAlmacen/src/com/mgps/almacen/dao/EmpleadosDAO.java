@@ -6,9 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mgps.almacen.database.ConexionDB;
+import com.mgps.almacen.entity.CategoriaTO;
 import com.mgps.almacen.entity.EmpleadoTO;
 import com.mgps.almacen.service.ICrudDao;
 
@@ -61,8 +63,8 @@ public int create(EmpleadoTO t) throws Exception {
     ps.setString(3, t.getNombre());
     ps.setString(4, t.getEmail());
     ps.setString(5, t.getDni());
-    ps.setInt(6, t.getEspecialidad().getIdEspecialidad());
-     ///ps.setInt(6, t.getCodigoEspecialidad());
+  //  ps.setInt(6, t.getEspecialidad().getIdEspecialidad());
+     ps.setInt(6, t.getCODEspecialidad());
     
     
     // ejecutar sp
@@ -94,8 +96,8 @@ public int update(EmpleadoTO t) throws Exception {
 		cs.setString(3, t.getNombre());
 		cs.setString(4, t.getEmail());
 		cs.setString(5, t.getDni());
-		//cs.setInt(6,t.getCodigoEspecialidad());
-		cs.setInt(6,t.getEspecialidad().getIdEspecialidad());
+		cs.setInt(6,t.getCODEspecialidad());
+		//cs.setInt(6,t.getEspecialidad().getIdEspecialidad());
 		
 		// cs.setInt(6, t.getEspecialidad());
 		
@@ -114,8 +116,67 @@ public int update(EmpleadoTO t) throws Exception {
    return ok;
 }
 
+  
+  @Override
+  public List<EmpleadoTO> readAll() throws Exception {
+    lista = new ArrayList<>();
+    try {
+      cn = ConexionDB.getConexion2020();
+      sql = "select * from TB_EMPLEADOS";
+      stm = cn.createStatement();
+      //ejecutar comando
+      rs = stm.executeQuery(sql);
+      while (rs.next()) {
+        cat = new EmpleadoTO();
+        cat.setIdEmpleado(rs.getInt(1));
+        cat.setApellido(rs.getString(2));
+        cat.setNombre(rs.getString(3));
+        cat.setEmail(rs.getString(4));
+        cat.setDni(rs.getString(5));
+       cat.setCODEspecialidad(rs.getInt(6));
+        
+       // cat.getEspecialidad().getIdEspecialidad().getInt(6);
+        
+        lista.add(cat);
+      }
+      rs.close();
+      stm.close();
+    } catch (Exception e) {
+      throw e;
+    } finally {
+    }
+        return lista;
+  }
 
 
+  @Override
+  public EmpleadoTO find(Object t) throws Exception {
+ 	 cat = null;
+ 	 try {
+ 		cn = ConexionDB.getConexion2020();
+ 		ps = cn.prepareStatement("SELECT * FROM TB_EMPLEADOS WHERE EMPL_IDEMPLEADO=?");
+ 		ps.setString(1, (String) t);
+ 		rs = ps.executeQuery();
+ 		if (rs.next()) {
+ 			cat = new EmpleadoTO();
+ 			cat.setIdEmpleado(Integer.parseInt(rs.getString(1)));
+ 			cat.setApellido(rs.getString(2));
+ 			cat.setNombre(rs.getString(3));
+
+ 			cat.setEmail(rs.getString(4));
+ 			cat.setDni(rs.getString(5));
+ 			cat.setCODEspecialidad(Integer.parseInt(rs.getString(6)));
+ 		}
+ 		rs.close();
+ 		ps.close();
+ 	} catch (SQLException e) {
+ 		throw e;
+ 	} finally {
+ 	}
+ 	 return cat;
+  }
+  
+  
 
 @Override
 public int delete(EmpleadoTO t) throws Exception {
@@ -124,19 +185,19 @@ public int delete(EmpleadoTO t) throws Exception {
 }
 
 @Override
-public EmpleadoTO find(Object t) throws Exception {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public List<EmpleadoTO> readAll() throws Exception {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
 public List<EmpleadoTO> readAll(Object t, int op) throws Exception {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public EmpleadoTO findA(Object t) throws Exception {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public List<EmpleadoTO> readAllBuscar() throws Exception {
 	// TODO Auto-generated method stub
 	return null;
 }

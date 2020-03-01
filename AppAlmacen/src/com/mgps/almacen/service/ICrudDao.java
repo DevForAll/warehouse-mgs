@@ -12,7 +12,11 @@ public interface ICrudDao <T> {
 
 	T find(Object t) throws Exception;
 
+	T findA(Object t) throws Exception;
+	
 	List<T> readAll() throws Exception;
+	
+	List<T> readAllBuscar() throws Exception;
 
 	List<T> readAll(Object t, int op) throws Exception;
 }

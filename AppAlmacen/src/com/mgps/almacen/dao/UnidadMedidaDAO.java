@@ -156,7 +156,7 @@ public class UnidadMedidaDAO implements ICrudDao<UnidadMedidaTO> {
 				 cat = null;
 				 try {
 					cn = ConexionDB.getConexion2020();
-					ps = cn.prepareStatement("select * from TB_CATEGORIAS where CATE_IDCATEGORIA=?");
+					ps = cn.prepareStatement("SELECT * FROM TB_UNIDAD_MEDIDA WHERE UNID_COD=?");
 					ps.setString(1, (String) t);
 					rs = ps.executeQuery();
 					if (rs.next()) {
@@ -164,6 +164,7 @@ public class UnidadMedidaDAO implements ICrudDao<UnidadMedidaTO> {
 						cat.setCod(Integer.parseInt(rs.getString(1)));
 						cat.setDescripcion(rs.getString(2));
 						cat.setDescripcionCorta(rs.getString(3));
+						cat.setCodigoSunat(rs.getString(4));
 					}
 					rs.close();
 					ps.close();
@@ -188,6 +189,18 @@ public class UnidadMedidaDAO implements ICrudDao<UnidadMedidaTO> {
 	
 	@Override
 	public List<UnidadMedidaTO> readAll(Object t, int op) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UnidadMedidaTO findA(Object t) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UnidadMedidaTO> readAllBuscar() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

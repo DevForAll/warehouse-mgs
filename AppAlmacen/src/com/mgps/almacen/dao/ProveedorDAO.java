@@ -161,14 +161,17 @@ public class ProveedorDAO implements ICrudDao<ProveedorTO>{
 			 cat = null;
 			 try {
 				cn = ConexionDB.getConexion2020();
-				ps = cn.prepareStatement("select * from TB_CATEGORIAS where CATE_IDCATEGORIA=?");
+				ps = cn.prepareStatement("SELECT * FROM TB_PROVEEDORES WHERE PROV_IDPROVEEDOR=?");
 				ps.setString(1, (String) t);
 				rs = ps.executeQuery();
 				if (rs.next()) {
 					cat = new ProveedorTO();
 					cat.setIdProveedor(Integer.parseInt(rs.getString(1)));
 					cat.setRazonSocial(rs.getString(2));
-					cat.setRuc(rs.getString(3));
+					cat.setDireccion(rs.getString(3));
+					cat.setRuc(rs.getString(4));
+					cat.setTelefono(rs.getString(5));
+					
 				}
 				rs.close();
 				ps.close();
@@ -188,6 +191,18 @@ public class ProveedorDAO implements ICrudDao<ProveedorTO>{
 		
 		@Override
 		public List<ProveedorTO> readAll(Object t, int op) throws Exception {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ProveedorTO findA(Object t) throws Exception {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List<ProveedorTO> readAllBuscar() throws Exception {
 			// TODO Auto-generated method stub
 			return null;
 		}

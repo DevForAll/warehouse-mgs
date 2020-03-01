@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import com.mgps.almacen.controller.EmpleadosBLL;
 import com.mgps.almacen.entity.EmpleadoTO;
-import com.mgps.almacen.entity.EspecialidadTO;
 
 
 import javax.swing.JLabel;
@@ -23,10 +22,15 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.JScrollPane;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrmEmpleados extends JFrame {
 
@@ -34,7 +38,7 @@ public class FrmEmpleados extends JFrame {
 	
 	EmpleadosBLL obj = new EmpleadosBLL();
 	EmpleadoTO pr;
-	EspecialidadTO es;
+	//EspecialidadTO es;
 	
 	private JPanel contentPane;
 	private JTextField txtCodigo;
@@ -44,6 +48,7 @@ public class FrmEmpleados extends JFrame {
 	private JTextField txtNombre;
 	private JTextField txtCodigoEspecialidad;
 	private JTextField textField;
+	private JTable tblEmpleados;
 
 	/**
 	 * Launch the application.
@@ -61,67 +66,6 @@ public class FrmEmpleados extends JFrame {
 		});
 	}
 
-	private void DatosEmpleados() {
-        pr = new EmpleadoTO();
-        EspecialidadTO esp = new EspecialidadTO();
-        pr.setNombre(txtNombre.getText());
-        pr.setApellido(txtApellido.getText());
-        pr.setNombre(txtNombre.getText());
-        pr.setDni(txtDni.getText());
-        pr.setEmail(txtEmail.getText());
-    //    pr.setEspecialidad(esp.getIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
-        
-      //  pr.getEspecialidad(esp.setIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
-        
-        
-      //  pr.setEspecialidad(esp.getIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
-        
-        
-        
-       // pr.setEspecialidad(especialidad);(es.setIdEspecialidad((Integer.parseInt(txtCodigoEspecialidad.getText()))));
-        //  pr.setEspecialidad(es.setIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
-//        pr.setEspecialidad().setIdEspecialidad((Integer.parseInt(txtCodigoEspecialidad.getText())));
-       // pr.setEspecialidad(es.setIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
-        
-    //  es.setIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText()));
-        
-//     pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
-        
-    }
-
-    private void procesar(int op) {
-    	DatosEmpleados();// llama a metodo
-        String msg = "";
-        int result;
-        try {
-            switch (op) {
-                case 1: // adiciona
-                    result = obj.EmpleadosAdicionar(pr);
-                    msg = "Empleados registrado con exito";
-                    break;
-                case 2://actualiza  getIdCategoria
-						 pr.setIdEmpleado(Integer.parseInt(txtCodigo.getText()));
-						 result = obj.EmpleadosActualizar(pr);
-						 msg = "Empleados actualizado con exito";
-	                break;
-                case 3://elimina
-               //     pr.setIdempleado(txtIdEmpleado.getText());
-              //      result = obj.EmpleadoEliminar(pr);
-              //      msg = "Empleado eliminado con exito";
-                    break;
-            }
-            JOptionPane.showMessageDialog(this, msg);
-         //   listaEmpleados();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-
-    }
-	
-	
-	
-	
-	
 	
 	/**
 	 * Create the frame.
@@ -277,6 +221,30 @@ public class FrmEmpleados extends JFrame {
 		scrollPane.setBounds(21, 66, 863, 388);
 		contentPane_1_1.add(scrollPane);
 		
+		tblEmpleados = new JTable();
+		tblEmpleados.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			
+			mostrar();
+			}
+		});
+		tblEmpleados.setModel(new DefaultTableModel(
+				new Object[][] {
+					},
+				new String[] {
+					"ID", "APELLIDOS","NOMBRE" ,"DNI","EMAIL","ESPECIALIDAD"
+				}
+			));
+			tblEmpleados.getColumnModel().getColumn(0).setPreferredWidth(50);
+			tblEmpleados.getColumnModel().getColumn(1).setPreferredWidth(171);
+			tblEmpleados.getColumnModel().getColumn(2).setPreferredWidth(171);
+			tblEmpleados.getColumnModel().getColumn(3).setPreferredWidth(171);
+			tblEmpleados.getColumnModel().getColumn(4).setPreferredWidth(171);
+			tblEmpleados.getColumnModel().getColumn(5).setPreferredWidth(171);
+						
+			scrollPane.setViewportView(tblEmpleados);
+		
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(96, 20, 315, 28);
@@ -287,5 +255,104 @@ public class FrmEmpleados extends JFrame {
 		btnImprimir.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnImprimir.setBounds(736, 458, 148, 43);
 		contentPane_1_1.add(btnImprimir);
+		listaEmpleados();
 	}
+	
+	
+	private void DatosEmpleados() {
+        pr = new EmpleadoTO();
+      //  EspecialidadTO esp = new EspecialidadTO();
+        pr.setNombre(txtNombre.getText());
+        pr.setApellido(txtApellido.getText());
+        pr.setNombre(txtNombre.getText());
+        pr.setDni(txtDni.getText());
+        pr.setEmail(txtEmail.getText());
+        pr.setCODEspecialidad(Integer.parseInt(txtCodigo.getText()));
+        // pr.setEspecialidad(es.setIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText())));
+      //  es.setIdEspecialidad(Integer.parseInt(txtCodigoEspecialidad.getText()));
+       //    
+        
+    }
+	
+	   public void listaEmpleados() {
+	    	try {
+				List<EmpleadoTO> lista = obj.EmpleadosListar();
+				verEmpleados(lista);
+				
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this, e.getMessage());
+			}
+	    }
+	    
+	    private void verEmpleados(List<EmpleadoTO> lista) {
+	        // variable de tipo tabla
+	        DefaultTableModel model =  (DefaultTableModel) tblEmpleados.getModel();
+	        model.setRowCount(0);
+	        for (EmpleadoTO x : lista) {
+	            Object[] dato = {
+	            	x.getIdEmpleado(),
+	                x.getApellido(),
+	                x.getNombre(),
+	                x.getEmail(),
+	                x.getDni(),
+	                x.getCODEspecialidad()};
+	            	model.addRow(dato);
+	        }
+	     }
+	
+	    private void mostrar() {
+	        try {
+	         
+	        //	 DefaultTableModel modelo = (DefaultTableModel)tblCategoria.getModel();
+			  pr = obj.EmpleadosBuscar(tblEmpleados.getModel().getValueAt(tblEmpleados.getSelectedRow(), 0).toString())        		;
+	           // pr = obj.CategoriaBuscar(txtFila.getText());
+	         //   (modelo.getValueAt(fila, 0).toString());
+	            if (pr != null) {
+	            	txtCodigo.setText(pr.getIdEmpleado() +"");
+	            	txtApellido.setText(pr.getApellido());
+	            	txtNombre.setText(pr.getNombre());
+	            	txtEmail.setText(pr.getEmail());
+	            	 txtDni.setText(pr.getDni());
+	                txtCodigoEspecialidad.setText(pr.getCODEspecialidad() +"");
+	                
+	               // txtcantidad.setText(pr.getStock() + "");
+	            
+	            } else {
+	                JOptionPane.showMessageDialog(this, "Categoria no existe...");
+	            }
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+	    }
+	    
+	
+    private void procesar(int op) {
+    	DatosEmpleados();// llama a metodo
+        String msg = "";
+        int result;
+        try {
+            switch (op) {
+                case 1: // adiciona
+                    result = obj.EmpleadosAdicionar(pr);
+                    msg = "Empleados registrado con exito";
+                    break;
+                case 2://actualiza  getIdCategoria
+						 pr.setIdEmpleado(Integer.parseInt(txtCodigo.getText()));
+						 result = obj.EmpleadosActualizar(pr);
+						 msg = "Empleados actualizado con exito";
+	                break;
+                case 3://elimina
+               //     pr.setIdempleado(txtIdEmpleado.getText());
+              //      result = obj.EmpleadoEliminar(pr);
+              //      msg = "Empleado eliminado con exito";
+                    break;
+            }
+            JOptionPane.showMessageDialog(this, msg);
+        listaEmpleados();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+
+    }
+	
 }

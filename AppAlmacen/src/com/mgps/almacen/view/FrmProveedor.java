@@ -27,6 +27,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrmProveedor extends JFrame {
 
@@ -189,6 +191,14 @@ public class FrmProveedor extends JFrame {
 		contentPane_1_1_1.add(scrollPane);
 		
 		tblProveedor = new JTable();
+		tblProveedor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				mostrar();
+				
+			}
+		});
 		scrollPane.setViewportView(tblProveedor);
 		tblProveedor.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
@@ -259,6 +269,30 @@ public class FrmProveedor extends JFrame {
 	        }
 	    }
 
+	    
+	    
+	    
+
+	    private void mostrar() {
+	        try {
+	      	  pr = obj.ProveedorBuscar(tblProveedor.getModel().getValueAt(tblProveedor.getSelectedRow(), 0).toString())        		;
+	              if (pr != null) {
+	            	txtCodigo.setText(pr.getIdProveedor() +"");
+	            	txtRazonSocial.setText(pr.getRazonSocial());
+	            	txtDireccion.setText(pr.getDireccion());
+	            	txtRuc.setText(pr.getRuc());
+	            	txtTelefono.setText(pr.getTelefono());
+	            
+	            } else {
+	                JOptionPane.showMessageDialog(this, "Marca no existe...");
+	            }
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+	    }
+	    
+	    
+	    
 	
 		private void DatosProveedor() {
 	        pr = new ProveedorTO();
@@ -292,7 +326,7 @@ public class FrmProveedor extends JFrame {
 		                    break;
 		            }
 		            JOptionPane.showMessageDialog(this, msg);
-		         //   listaEmpleados();
+		            listaProveedor();
 		        } catch (Exception e) {
 		            JOptionPane.showMessageDialog(this, e.getMessage());
 		        }

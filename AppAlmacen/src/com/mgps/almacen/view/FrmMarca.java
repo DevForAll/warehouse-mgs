@@ -28,6 +28,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrmMarca extends JFrame {
 
@@ -62,53 +64,14 @@ public class FrmMarca extends JFrame {
 		});
 	}
 
-	
-	private void DatosCategoria() {
-        pr = new MarcaTO();
-        pr.setNombre(txtNombre.getText());
-        pr.setDescripcion(txtDescripcion.getText());
-       // pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
-        
-    }
-
-
-    private void procesar(int op) {
-    	DatosCategoria();// llama a metodo
-        String msg = "";
-        int result;
-        try {
-            switch (op) {
-                case 1: // adiciona
-                    result = obj.MarcaAdicionar(pr);
-                    msg = "Marca registrado con exito";
-                    break;
-                case 2://actualiza
-                	 pr.setIdMarca((Integer.parseInt(txtCodigo.getText())));
-                result = obj.MarcaActualizar(pr);
-               msg = "Marca actualizado con exito";
-               break;
-                case 3://elimina
-               //     pr.setIdempleado(txtIdEmpleado.getText());
-              //      result = obj.EmpleadoEliminar(pr);
-              //      msg = "Empleado eliminado con exito";
-                    break;
-            }
-            JOptionPane.showMessageDialog(this, msg);
-         //   listaEmpleados();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-
-    }
-	
-	
+		
 	
 	/**
 	 * Create the frame.
 	 */
 	public FrmMarca() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 985, 859);
+		setBounds(100, 100, 942, 786);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -124,13 +87,13 @@ public class FrmMarca extends JFrame {
 		lblMarca.setIcon(new ImageIcon(FrmMarca.class.getResource("/cjava/imagenes/035-flag.png")));
 		lblMarca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMarca.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblMarca.setBounds(35, 11, 424, 35);
+		lblMarca.setBounds(0, 11, 901, 35);
 		contentPane_1.add(lblMarca);
 		
 		JPanel contentPane_1_1 = new JPanel();
 		contentPane_1_1.setLayout(null);
 		contentPane_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		contentPane_1_1.setBounds(35, 48, 876, 205);
+		contentPane_1_1.setBounds(0, 54, 901, 205);
 		contentPane_1.add(contentPane_1_1);
 		
 		JLabel lblCodigoEnmpleado = new JLabel("CODIGO");
@@ -196,7 +159,7 @@ public class FrmMarca extends JFrame {
 		JPanel contentPane_1_1_1 = new JPanel();
 		contentPane_1_1_1.setLayout(null);
 		contentPane_1_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		contentPane_1_1_1.setBounds(10, 290, 907, 512);
+		contentPane_1_1_1.setBounds(10, 290, 906, 450);
 		contentPane.add(contentPane_1_1_1);
 		
 		JLabel lblNombre_1 = new JLabel("NOMBRE :");
@@ -205,16 +168,24 @@ public class FrmMarca extends JFrame {
 		contentPane_1_1_1.add(lblNombre_1);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setIcon(new ImageIcon(FrmMarca.class.getResource("/cjava/imagenes/011-loupe-1.png")));
 		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnBuscar.setBounds(416, 11, 124, 43);
 		contentPane_1_1_1.add(btnBuscar);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		scrollPane.setBounds(21, 66, 863, 388);
+		scrollPane.setBounds(21, 66, 863, 312);
 		contentPane_1_1_1.add(scrollPane);
 		
 		tblMarca = new JTable();
+		tblMarca.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				mostrar();
+			}
+		});
 		scrollPane.setViewportView(tblMarca);
 		tblMarca.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
@@ -243,8 +214,9 @@ public class FrmMarca extends JFrame {
 		contentPane_1_1_1.add(textField);
 		
 		JButton btnImprimir = new JButton("Imprimir");
+		btnImprimir.setIcon(new ImageIcon(FrmMarca.class.getResource("/cjava/imagenes/042-folder.png")));
 		btnImprimir.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnImprimir.setBounds(736, 458, 148, 43);
+		btnImprimir.setBounds(733, 389, 148, 43);
 		contentPane_1_1_1.add(btnImprimir);
 		
 		
@@ -274,5 +246,66 @@ public class FrmMarca extends JFrame {
 	            	model.addRow(dato);
 	        }
 	    }
+	    
+	    
+
+	    private void mostrar() {
+	        try {
+	      	  pr = obj.MarcaBuscar(tblMarca.getModel().getValueAt(tblMarca.getSelectedRow(), 0).toString())        		;
+	              if (pr != null) {
+	            	txtCodigo.setText(pr.getIdMarca() +"");
+	            	txtNombre.setText(pr.getNombre());
+	            	txtDescripcion.setText(pr.getDescripcion());
+	            
+	            } else {
+	                JOptionPane.showMessageDialog(this, "Marca no existe...");
+	            }
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+	    }
+	    
+	    
+	    
+
+		private void DatosCategoria() {
+	        pr = new MarcaTO();
+	        pr.setNombre(txtNombre.getText());
+	        pr.setDescripcion(txtDescripcion.getText());
+	      //  pr.setIdMarca(Integer.parseInt(txtCodigo.getText()));
+	        
+	    }
+
+
+	    private void procesar(int op) {
+	    	DatosCategoria();// llama a metodo
+	        String msg = "";
+	        int result;
+	        try {
+	            switch (op) {
+	                case 1: // adiciona
+	                    result = obj.MarcaAdicionar(pr);
+	                    msg = "Marca registrado con exito";
+	                    break;
+	                case 2://actualiza
+	                	 pr.setIdMarca((Integer.parseInt(txtCodigo.getText())));
+	                result = obj.MarcaActualizar(pr);
+	               msg = "Marca actualizado con exito";
+	               break;
+	                case 3://elimina
+	               //     pr.setIdempleado(txtIdEmpleado.getText());
+	              //      result = obj.EmpleadoEliminar(pr);
+	              //      msg = "Empleado eliminado con exito";
+	                    break;
+	            }
+	            JOptionPane.showMessageDialog(this, msg);
+	       listaMarca();
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+
+	    }
+		
+	    
 
 }

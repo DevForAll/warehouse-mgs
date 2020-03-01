@@ -22,7 +22,21 @@ public class CategoriaBLL {
     	return dao.find(x);
     }
     
-	public int CategoriaAdicionar(CategoriaTO x) throws Exception {
+    
+    
+    
+    public List<CategoriaTO> CategoriaListarXNombre() throws Exception{
+    	return dao.readAllBuscar();
+    }
+	    
+    public CategoriaTO CategoriaBuscarXNombre(Object x) throws Exception{
+    	return dao.findA(x);
+    }
+	
+    
+    
+    
+    public int CategoriaAdicionar(CategoriaTO x) throws Exception {
         return dao.create(x);
     }
 

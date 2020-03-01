@@ -163,12 +163,89 @@ public class CategoriaDAO implements ICrudDao<CategoriaTO>  {
 	}
 	 return cat;
  }
-
+//
+//
  @Override
- public List<CategoriaTO> readAll(Object t, int op) throws Exception {
+ public CategoriaTO findA(Object t) throws Exception {
+	 cat = null;
+	 try {
+		cn = ConexionDB.getConexion2020();
+		ps = cn.prepareStatement("SELECT * FROM TB_CATEGORIAS WHERE CATE_NOMBRE=?");
+		ps.setString(1, (String) t);
+		rs = ps.executeQuery();
+		if (rs.next()) {
+			cat = new CategoriaTO();
+			cat.setIdCategoria(Integer.parseInt(rs.getString(1)));
+			cat.setNombre(rs.getString(2));
+			cat.setDescripcion(rs.getString(3));
+		}
+		rs.close();
+		ps.close();
+	} catch (SQLException e) {
+		throw e;
+	} finally {
+	}
+	 return cat;
+ }
+//
+// 
+// 
+
+@Override
+public List<CategoriaTO> readAllBuscar() throws Exception {
 	// TODO Auto-generated method stub
- 	 return null;
- }	  
-	  
+	
+	lista = new ArrayList<>();
+	   try {
+	     cn = ConexionDB.getConexion2020();
+	     sql = "SELECT * FROM TB_CATEGORIAS ";
+	     stm = cn.createStatement();
+	     //ejecutar comando
+	     rs = stm.executeQuery(sql);
+	     while (rs.next()) {
+	       cat = new CategoriaTO();
+	       cat.setIdCategoria(rs.getInt(1));
+	       cat.setNombre(rs.getString(2));
+	       cat.setDescripcion(rs.getString(3));
+	       lista.add(cat);
+	     }
+	     rs.close();
+	     stm.close();
+	   } catch (Exception e) {
+	     throw e;
+	   } finally {
+	   }
+	       return lista;
+	
+	
+	
+}
+
+@Override
+public List<CategoriaTO> readAll(Object t, int op) throws Exception {
+	// TODO Auto-generated method stub
+	lista = new ArrayList<>();
+	   try {
+	     cn = ConexionDB.getConexion2020();
+	     sql = "SELECT * FROM TB_CATEGORIAS WHERE CATE_NOMBRE=?";
+	     stm = cn.createStatement();
+	     //ejecutar comando
+	     rs = stm.executeQuery(sql);
+	     while (rs.next()) {
+	       cat = new CategoriaTO();
+	       cat.setIdCategoria(rs.getInt(1));
+	       cat.setNombre(rs.getString(2));
+	       cat.setDescripcion(rs.getString(3));
+	       lista.add(cat);
+	     }
+	     rs.close();
+	     stm.close();
+	   } catch (Exception e) {
+	     throw e;
+	   } finally {
+	   }
+	       return lista;
+	
+}
 }
 

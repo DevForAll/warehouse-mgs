@@ -155,7 +155,7 @@ public class MarcaDAO  implements ICrudDao<MarcaTO>{
 			 cat = null;
 			 try {
 				cn = ConexionDB.getConexion2020();
-				ps = cn.prepareStatement("select * from TB_CATEGORIAS where CATE_IDCATEGORIA=?");
+				ps = cn.prepareStatement("SELECT * FROM TB_MARCA WHERE MARC_IDMARCA=?");
 				ps.setString(1, (String) t);
 				rs = ps.executeQuery();
 				if (rs.next()) {
@@ -186,6 +186,22 @@ public class MarcaDAO  implements ICrudDao<MarcaTO>{
 
 	@Override
 	public List<MarcaTO> readAll(Object t, int op) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public MarcaTO findA(Object t) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<MarcaTO> readAllBuscar() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -27,6 +27,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrmEspecialidad extends JFrame {
 
@@ -61,45 +63,6 @@ public class FrmEspecialidad extends JFrame {
 	}
 
 
-	private void DatosCategoria() {
-        pr = new EspecialidadTO();
-        pr.setNombre(txtNombre.getText());
-        pr.setDescripcion(txtDescripcion.getText());
-       // pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
-        
-    }
-
-
-    private void procesar(int op) {
-    	DatosCategoria();// llama a metodo
-        String msg = "";
-        int result;
-        try {
-            switch (op) {
-                case 1: // adiciona
-                    result = obj.EspecialidadAdicionar(pr);
-                    msg = "Especialidad registrado con exito";
-                    break;
-                case 2://actualiza
-                	pr.setIdEspecialidad((Integer.parseInt(txtCodigo.getText())));
-                result = obj.EspecialidadActualizar(pr);
-               msg = "Especialidad actualizado con exito";
-                 break;
-                case 3://elimina
-               //     pr.setIdempleado(txtIdEmpleado.getText());
-              //      result = obj.EmpleadoEliminar(pr);
-              //      msg = "Empleado eliminado con exito";
-                    break;
-            }
-            JOptionPane.showMessageDialog(this, msg);
-           listaEspecialidad();
-           } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-
-    }
-	
-	
 	
 	
 	/**
@@ -167,6 +130,12 @@ public class FrmEspecialidad extends JFrame {
 		contentPane_1.add(btnEliminar);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				procesar(1);
+				
+			}
+		});
 		btnGuardar.setIcon(new ImageIcon(FrmEspecialidad.class.getResource("/cjava/imagenes/035-save.png")));
 		btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnGuardar.setBounds(725, 11, 141, 45);
@@ -202,6 +171,13 @@ public class FrmEspecialidad extends JFrame {
 		contentPane_1_1.add(scrollPane);
 		
 		tblEspecialidad = new JTable();
+		tblEspecialidad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				mostrar();
+			}
+		});
 		scrollPane.setViewportView(tblEspecialidad);
 		tblEspecialidad.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
@@ -264,4 +240,62 @@ public class FrmEspecialidad extends JFrame {
 	        }
 	    }
 	
+	    
+	    
+	    
+	    private void mostrar() {
+	        try {
+	      	  pr = obj.EspecialidadBuscar(tblEspecialidad.getModel().getValueAt(tblEspecialidad.getSelectedRow(), 0).toString())        		;
+	              if (pr != null) {
+	            	txtCodigo.setText(pr.getIdEspecialidad() +"");
+	            	txtNombre.setText(pr.getNombre());
+	            	txtDescripcion.setText(pr.getDescripcion());
+	            
+	            } else {
+	                JOptionPane.showMessageDialog(this, "Especialidad no existe...");
+	            }
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+	    }
+	    
+	    
+	    private void DatosCategoria() {
+	        pr = new EspecialidadTO();
+	        pr.setNombre(txtNombre.getText());
+	        pr.setDescripcion(txtDescripcion.getText());
+	       // pr.setIdCategoria(Integer.parseInt(txtCodigo.getText()));
+	        
+	    }
+
+
+	    private void procesar(int op) {
+	    	DatosCategoria();// llama a metodo
+	        String msg = "";
+	        int result;
+	        try {
+	            switch (op) {
+	                case 1: // adiciona
+	                    result = obj.EspecialidadAdicionar(pr);
+	                    msg = "Especialidad registrado con exito";
+	                    break;
+	                case 2://actualiza
+	                	pr.setIdEspecialidad((Integer.parseInt(txtCodigo.getText())));
+	                result = obj.EspecialidadActualizar(pr);
+	               msg = "Especialidad actualizado con exito";
+	                 break;
+	                case 3://elimina
+	               //     pr.setIdempleado(txtIdEmpleado.getText());
+	              //      result = obj.EmpleadoEliminar(pr);
+	              //      msg = "Empleado eliminado con exito";
+	                    break;
+	            }
+	            JOptionPane.showMessageDialog(this, msg);
+	           listaEspecialidad();
+	           } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+
+	    }
+		
 }

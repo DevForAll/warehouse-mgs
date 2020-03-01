@@ -152,7 +152,7 @@ public class EspecialidadDAO implements ICrudDao<EspecialidadTO> {
 		 cat = null;
 		 try {
 			cn = ConexionDB.getConexion2020();
-			ps = cn.prepareStatement("select * from TB_CATEGORIAS where CATE_IDCATEGORIA=?");
+			ps = cn.prepareStatement("SELECT * FROM TB_ESPECIALIDAD WHERE ESPE_IDCESPECIALIDAD=?");
 			ps.setString(1, (String) t);
 			rs = ps.executeQuery();
 			if (rs.next()) {
@@ -172,6 +172,18 @@ public class EspecialidadDAO implements ICrudDao<EspecialidadTO> {
 
 	@Override
 	public List<EspecialidadTO> readAll(Object t, int op) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EspecialidadTO findA(Object t) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EspecialidadTO> readAllBuscar() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
