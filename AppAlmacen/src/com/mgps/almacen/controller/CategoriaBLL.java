@@ -5,6 +5,7 @@ import java.util.List;
 import com.mgps.almacen.dao.CategoriaDAO;
 import com.mgps.almacen.entity.CategoriaTO;
 
+
 public class CategoriaBLL {
 
 	CategoriaDAO dao;
@@ -22,7 +23,10 @@ public class CategoriaBLL {
     	return dao.find(x);
     }
     
-    
+public List<CategoriaTO> CategoriaListar2(Object o,int op ) throws Exception{
+		
+		return dao.readAll(o,op);
+	}
     
     
     public List<CategoriaTO> CategoriaListarXNombre() throws Exception{

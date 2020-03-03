@@ -45,9 +45,10 @@ public class ProveedorDAO implements ICrudDao<ProveedorTO>{
 		    return cont;
 		  }
 	  
+
+	  
 	  
 	  final String SQL_ADICIONAR = "{call SP_PROVEEDORES_INSERTAR(?,?,?,?,?)}";
-	  
 	  final String SQL_ACTUALIZAR = "{call SP_PROVEEDORES_ACTUALIZAR(?,?,?,?,?)}";
 	  
 	  

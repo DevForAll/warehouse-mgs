@@ -228,6 +228,7 @@ public List<CategoriaTO> readAll(Object t, int op) throws Exception {
 	   try {
 	     cn = ConexionDB.getConexion2020();
 	     sql = "SELECT * FROM TB_CATEGORIAS WHERE CATE_NOMBRE=?";
+	 	ps.setString(1, (String) t);
 	     stm = cn.createStatement();
 	     //ejecutar comando
 	     rs = stm.executeQuery(sql);

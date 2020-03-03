@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import com.mgps.almacen.entity.CategoriaTO;
+
 import com.mgps.almacen.controller.CategoriaBLL;
 
 import java.awt.Color;
@@ -27,6 +28,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ScrollPaneConstants;
@@ -168,7 +171,7 @@ public class FrmCategoria extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				
+				listaCategoriasNombre();
 			//mostrarNombre();
 			//listaCategoriasNombre();
 				
@@ -287,6 +290,41 @@ public class FrmCategoria extends JFrame {
 	
 
 	    
+	    
+	    private void listaCategoriasNombre() {
+	        try {
+	        
+	        	
+	        //	String a=txtBuscarNombre.getText();
+	        	
+	        	List<CategoriaTO> listaE = obj.CategoriaListar2( txtBuscarNombre.getText(),1);
+	          int nfilasE = 0;
+	        //  if (listaE != null && !listaE.isEmpty()) {
+	        	  VERlistaCategoriasNombre(listaE);
+	         // } 
+	      	   } catch (Exception e) {
+	        		JOptionPane.showMessageDialog(this, e.getMessage());
+
+	        }
+	  
+	      }
+	   
+	     
+	    
+	    private void VERlistaCategoriasNombre(List<CategoriaTO> listaE) {
+	        //variable de tipo table model
+	        DefaultTableModel tabla = (DefaultTableModel) tblCategoria.getModel();
+	        tabla.setRowCount(0);
+	        for (CategoriaTO p : listaE) {
+	          Object[] datos = {
+	        		  
+	          p.getIdCategoria(), p.getNombre(), p.getDescripcion()};
+	          tabla.addRow(datos);// nagrega a ka tabla
+	        }
+	      }
+	    
+	    
+	    
 
 	    private void mostrar() {
 	        try {
@@ -314,6 +352,11 @@ public class FrmCategoria extends JFrame {
 	        }
 	    }
 
+	    
+	    
+	    
+	    
+	    
 	    private void mostrarNombre() {
 	     
 	    	  try {

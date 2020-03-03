@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -20,24 +22,49 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
+
+import com.mgps.almacen.controller.ProductoBLL;
+import com.mgps.almacen.entity.ProductoTO;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+
+import java.util.GregorianCalendar;
+import java.util.logging.SimpleFormatter;
+import java.awt.event.ActionEvent;
+import com.toedter.calendar.JDayChooser;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrmProducto extends JFrame {
 
+	
+
+	ProductoBLL obj = new ProductoBLL();
+	ProductoTO pr;
+	    
+	
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtCodigoProducto;
+	private JTextField txtNombre;
+	private JTextField txtDescripcion;
 	private JTextField textField_3;
 	private JTable table;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
+	private JTextField txtCategoria;
+	private JTextField txtMarca;
+	private JTextField txtUnidadMedida;
+	private JTextField txtUbicacion;
+	private JTextField txtPrecioCompra;
+	private JTextField txtStock;
+	private JTextField txtStockMinimo;
+	private JTextField txtVence;
 
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -132,20 +159,20 @@ public class FrmProducto extends JFrame {
 		lblCodigoEnmpleado.setBounds(25, 26, 62, 14);
 		contentPane_1_1.add(lblCodigoEnmpleado);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(122, 20, 86, 29);
-		contentPane_1_1.add(textField);
+		txtCodigoProducto = new JTextField();
+		txtCodigoProducto.setColumns(10);
+		txtCodigoProducto.setBounds(122, 20, 86, 29);
+		contentPane_1_1.add(txtCodigoProducto);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(121, 52, 425, 28);
-		contentPane_1_1.add(textField_1);
+		txtNombre = new JTextField();
+		txtNombre.setColumns(10);
+		txtNombre.setBounds(121, 52, 425, 28);
+		contentPane_1_1.add(txtNombre);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(121, 83, 425, 28);
-		contentPane_1_1.add(textField_2);
+		txtDescripcion = new JTextField();
+		txtDescripcion.setColumns(10);
+		txtDescripcion.setBounds(121, 83, 425, 28);
+		contentPane_1_1.add(txtDescripcion);
 		
 		JLabel lblNombre = new JLabel("NOMBRE :");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -158,6 +185,19 @@ public class FrmProducto extends JFrame {
 		contentPane_1_1.add(lblDescripcion);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				procesar(1);
+				
+			}
+		});
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
 		btnGuardar.setIcon(new ImageIcon(FrmProducto.class.getResource("/cjava/imagenes/035-save.png")));
 		btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnGuardar.setBounds(745, 19, 140, 48);
@@ -179,20 +219,20 @@ public class FrmProducto extends JFrame {
 		cmbCategoria.setBounds(122, 119, 231, 27);
 		contentPane_1_1.add(cmbCategoria);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(363, 117, 32, 29);
-		contentPane_1_1.add(textField_4);
+		txtCategoria = new JTextField();
+		txtCategoria.setColumns(10);
+		txtCategoria.setBounds(363, 117, 32, 29);
+		contentPane_1_1.add(txtCategoria);
 		
 		JLabel lblCategoria = new JLabel("CATEGORIA :");
 		lblCategoria.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblCategoria.setBounds(25, 125, 110, 20);
 		contentPane_1_1.add(lblCategoria);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(293, 156, 32, 29);
-		contentPane_1_1.add(textField_5);
+		txtMarca = new JTextField();
+		txtMarca.setColumns(10);
+		txtMarca.setBounds(293, 156, 32, 29);
+		contentPane_1_1.add(txtMarca);
 		
 		JComboBox cmbCategoria_1 = new JComboBox();
 		cmbCategoria_1.setBounds(122, 157, 161, 27);
@@ -212,10 +252,10 @@ public class FrmProducto extends JFrame {
 		contentPane_1_1.add(lblUnidadMedida);
 		lblUnidadMedida.setFont(new Font("Tahoma", Font.BOLD, 13));
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(363, 194, 32, 29);
-		contentPane_1_1.add(textField_6);
-		textField_6.setColumns(10);
+		txtUnidadMedida = new JTextField();
+		txtUnidadMedida.setBounds(363, 194, 32, 29);
+		contentPane_1_1.add(txtUnidadMedida);
+		txtUnidadMedida.setColumns(10);
 		
 		JButton btnNewButton_1_1 = new JButton("");
 		btnNewButton_1_1.setIcon(new ImageIcon(FrmProducto.class.getResource("/cjava/imagenes/035-add.png")));
@@ -243,58 +283,131 @@ public class FrmProducto extends JFrame {
 		lblUbicacion.setBounds(25, 236, 110, 20);
 		contentPane_1_1.add(lblUbicacion);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(121, 228, 425, 28);
-		contentPane_1_1.add(textField_7);
+		txtUbicacion = new JTextField();
+		txtUbicacion.setColumns(10);
+		txtUbicacion.setBounds(121, 228, 425, 28);
+		contentPane_1_1.add(txtUbicacion);
 		
 		JLabel lblPrecioDeCompra = new JLabel("PRECIO DE COMPRA");
 		lblPrecioDeCompra.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblPrecioDeCompra.setBounds(239, 269, 142, 23);
 		contentPane_1_1.add(lblPrecioDeCompra);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(380, 267, 86, 29);
-		contentPane_1_1.add(textField_8);
+		txtPrecioCompra = new JTextField();
+		txtPrecioCompra.setColumns(10);
+		txtPrecioCompra.setBounds(380, 267, 86, 29);
+		contentPane_1_1.add(txtPrecioCompra);
 		
 		JLabel lblStock = new JLabel("STOCK:");
 		lblStock.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblStock.setBounds(25, 275, 86, 14);
 		contentPane_1_1.add(lblStock);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(122, 267, 86, 29);
-		contentPane_1_1.add(textField_9);
+		txtStock = new JTextField();
+		txtStock.setColumns(10);
+		txtStock.setBounds(122, 267, 86, 29);
+		contentPane_1_1.add(txtStock);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(605, 267, 86, 29);
-		contentPane_1_1.add(textField_10);
+		txtStockMinimo = new JTextField();
+		txtStockMinimo.setColumns(10);
+		txtStockMinimo.setBounds(605, 267, 86, 29);
+		contentPane_1_1.add(txtStockMinimo);
 		
 		JLabel lblStockMinimo = new JLabel("STOCK MINIMO:");
 		lblStockMinimo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblStockMinimo.setBounds(493, 273, 102, 14);
 		contentPane_1_1.add(lblStockMinimo);
 		
-		JLabel lblVence = new JLabel("VENCE:");
+		JLabel lblVence = new JLabel("S");
 		lblVence.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblVence.setBounds(25, 307, 102, 14);
+		lblVence.setBounds(48, 305, 102, 14);
 		contentPane_1_1.add(lblVence);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("");
-		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.BOLD, 14));
-		chckbxNewCheckBox.setBounds(122, 297, 26, 29);
-		contentPane_1_1.add(chckbxNewCheckBox);
+		JCheckBox chkVence = new JCheckBox("SI");
+		chkVence.setFont(new Font("Tahoma", Font.BOLD, 14));
+		chkVence.setBounds(102, 297, 46, 29);
+		contentPane_1_1.add(chkVence);
 		
 		JLabel lblFechaDeVencimiento = new JLabel("FECHA DE VENCIMIENTO:");
 		lblFechaDeVencimiento.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblFechaDeVencimiento.setBounds(169, 308, 156, 13);
 		contentPane_1_1.add(lblFechaDeVencimiento);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(335, 303, 131, 23);
-		contentPane_1_1.add(dateChooser);
+		JDateChooser dtFechaVencimiento = new JDateChooser();
+		dtFechaVencimiento.setBounds(335, 303, 131, 23);
+		contentPane_1_1.add(dtFechaVencimiento);
+		
+		txtVence = new JTextField();
+		txtVence.setColumns(10);
+		txtVence.setBounds(25, 300, 13, 29);
+		contentPane_1_1.add(txtVence);
 	}
+	
+	
+	
+	private void DatosProductos() {
+        pr = new ProductoTO();
+       
+//        String dia = Integer.toString(jdt.getCalendar().get(Calendar.DAY_OF_MONTH));
+//        String mes = Integer.toString(jdt.getCalendar().get(Calendar.MONTH) + 1);
+//        String year = Integer.toString(jdt.getCalendar().get(Calendar.YEAR));
+//        String fecha = (year + "-" + mes+ "-" + dia);
+//        txtfecha.setText(fecha);
+        
+        
+        pr.setDescripcion(txtDescripcion.getText());
+        pr.getCategoriaTO().setIdCategoria(Integer.parseInt(txtStockMinimo.getText()));
+        pr.getMarcaTO().setIdMarca(Integer.parseInt(txtStockMinimo.getText()));
+        pr.setCodigo(Integer.parseInt(txtCodigoProducto.getText()));
+        pr.setUbicacion(txtDescripcion.getText());
+        pr.setPrecioCompra(Double.parseDouble(txtPrecioCompra.getText()));
+        pr.setStock(Integer.parseInt(txtStock.getText()));
+        pr.setMinStock(Integer.parseInt(txtStockMinimo.getText()));
+        pr.setVen(txtVence.getText());
+        
+        JDateChooser dtFechaVencimiento = null;
+      
+   	Date Fec =dtFechaVencimiento.getDate();
+      long FechaNumero = Fec.getTime();
+      java.sql.Date FechaX =  new java.sql.Date(FechaNumero);
+                
+    //    SimpleDateFormat formFecha = new SimpleDateFormat("yyyy-MM,dd");
+    //    Date Fechtxt;
+    //    Fechtxt=formFecha.parse(dtFechaVencimiento.getDateFormatString());
+        
+		pr.setFechaVen( Fec);
+		
+  
+        
+    }
+
+	
+	   private void procesar(int op) {
+		   DatosProductos();// llama a metodo
+	        String msg = "AAAAAAAAAAAAAAAAAAAAA";
+	        int result;
+	        try {
+	            switch (op) {
+	                case 1: // adiciona
+	                    result = obj.ProductoAdicionar(pr);
+	                    msg = "Producto  registrado con exito";
+	                    break;
+	                case 2://actualiza
+	                	// pr.setIdMarca((Integer.parseInt(txtCodigo.getText())));
+	              //  result = obj.MarcaActualizar(pr);
+	             //  msg = "Marca actualizado con exito";
+	               break;
+	                case 3://elimina
+	               //     pr.setIdempleado(txtIdEmpleado.getText());
+	              //      result = obj.EmpleadoEliminar(pr);
+	              //      msg = "Empleado eliminado con exito";
+	                    break;
+	            }
+	            JOptionPane.showMessageDialog(this, msg);
+	      // listaMarca();
+	        } catch (Exception e) {
+	            JOptionPane.showMessageDialog(this, e.getMessage());
+	        }
+
+	    }
 }

@@ -7,24 +7,28 @@ public class ProductoTO {
 	private String descripcion;
 	private CategoriaTO categoriaTO;
 	private MarcaTO marcaTO;
+	private int Codigo;
 	private UnidadMedidaTO unidadMedidoTO;
 	private String ubicacion;
-	private float precioCompra;
+	private double precioCompra;
 	private int stock;
 	private int minStock;
 	private String ven;
 	private Date fechaVen;
+	//private Date fechaVen;
+	
 	
 	public ProductoTO() {
 	}
 
 	public ProductoTO(int idproducto, String descripcion, CategoriaTO categoriaTO, MarcaTO marcaTO,
-			UnidadMedidaTO unidadMedidoTO, String ubicacion, float precioCompra, int stock, int minStock,
+			int Codigo,	UnidadMedidaTO unidadMedidoTO, String ubicacion, double precioCompra, int stock, int minStock,
 			String ven, Date fechaVen) {
 		this.idproducto = idproducto;
 		this.descripcion = descripcion;
 		this.categoriaTO = categoriaTO;
 		this.marcaTO = marcaTO;
+		this.Codigo = Codigo;
 		this.unidadMedidoTO = unidadMedidoTO;
 		this.ubicacion = ubicacion;
 		this.precioCompra = precioCompra;
@@ -36,6 +40,14 @@ public class ProductoTO {
 
 	public int getIdproducto() {
 		return idproducto;
+	}
+
+	public int getCodigo() {
+		return Codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		Codigo = codigo;
 	}
 
 	public void setIdproducto(int idproducto) {
@@ -82,11 +94,11 @@ public class ProductoTO {
 		this.ubicacion = ubicacion;
 	}
 
-	public float getPrecioCompra() {
+	public double getPrecioCompra() {
 		return precioCompra;
 	}
 
-	public void setPrecioCompra(float precioCompra) {
+	public void setPrecioCompra(double precioCompra) {
 		this.precioCompra = precioCompra;
 	}
 
